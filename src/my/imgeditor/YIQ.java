@@ -16,37 +16,36 @@ import javax.swing.JLabel;
  */
 public class YIQ {
     
-    public static void RGBtoYIQ(){
+    public static void RGBparaYIQ(){
         
-        for (int j = 0; j < meuJFrame.imagem2.getWidth(); j++) {
-            for (int i = 0; i < meuJFrame.imagem2.getHeight(); i++) {
-                Color c = new Color(meuJFrame.imagem2.getRGB(j, i));
+        for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
+                Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
                 int Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                 int I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
                 int Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));
-                img2structYIQ[i][j].Y = Y;
-                img2structYIQ[i][j].I = I;
-                img2structYIQ[i][j].Q = Q;
-                c = new Color(meuJFrame.imgcpy.getRGB(j, i));
+                estruturaTemporaria[i][j].Y = Y;
+                estruturaTemporaria[i][j].I = I;
+                estruturaTemporaria[i][j].Q = Q;
+                c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                 Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                 I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
                 Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));
-                cpystructYIQ[i][j].Y = Y;
-                cpystructYIQ[i][j].I = I;
-                cpystructYIQ[i][j].Q = Q;
+                estruturaTemporaraCopia[i][j].Y = Y;
+                estruturaTemporaraCopia[i][j].I = I;
+                estruturaTemporaraCopia[i][j].Q = Q;
             }
         }        
     }
     
-    public static void YIQtoRGB(){
+    public static void YIQparaRGB(){
         
-        for (int j = 0; j < meuJFrame.imagem2.getWidth(); j++) {
-            for (int i = 0; i < meuJFrame.imagem2.getHeight(); i++) {                
+        for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {                
                 Color c;
-                int R = (int) (img2structYIQ[i][j].Y + 0.9563 * img2structYIQ[i][j].I + 0.6210 * img2structYIQ[i][j].Q);
-                int G = (int) (img2structYIQ[i][j].Y - 0.2721 * img2structYIQ[i][j].I - 0.6474 * img2structYIQ[i][j].Q);
-                int B = (int) (img2structYIQ[i][j].Y - 1.1070 * img2structYIQ[i][j].I + 1.7046 * img2structYIQ[i][j].Q);
-                
+                int R = (int) (estruturaTemporaria[i][j].Y + 0.9563 * estruturaTemporaria[i][j].I + 0.6210 * estruturaTemporaria[i][j].Q);
+                int G = (int) (estruturaTemporaria[i][j].Y - 0.2721 * estruturaTemporaria[i][j].I - 0.6474 * estruturaTemporaria[i][j].Q);
+                int B = (int) (estruturaTemporaria[i][j].Y - 1.1070 * estruturaTemporaria[i][j].I + 1.7046 * estruturaTemporaria[i][j].Q);                
                 if (R < 0) {
                     R = 0;
                 }
@@ -65,132 +64,128 @@ public class YIQ {
                 if (B > 255) {
                     B = 255;
                 }
-
                 c = new Color(R, G, B);
-                meuJFrame.imagem2.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
     }
     
-    public static BufferedImage Ycomponent(int x){
-        
+    public static BufferedImage ComponenteY(int x){        
         if(x == 0){
-            lbl.setIcon(new ImageIcon(meuJFrame.imgcpy));
-            applied = true;
-            return meuJFrame.imgcpy;
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
+            foiAplicado = true;
+            return FramePrincipal.imagemCopia;
         }
         else{
-            for (int j = 0; j < meuJFrame.imagem2.getWidth(); j++) {
-                for (int i = 0; i < meuJFrame.imagem2.getHeight(); i++) {
-                    img2structYIQ[i][j].Y =  cpystructYIQ[i][j].Y + x;
+            for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+                for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
+                    estruturaTemporaria[i][j].Y =  estruturaTemporaraCopia[i][j].Y + x;
                 }
             }
-            YIQtoRGB();
-            lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-            applied = true;
+            YIQparaRGB();
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+            foiAplicado = true;
         }
-        return meuJFrame.imagem2;
+        return FramePrincipal.imagemASerExibida;
     }
     
-    public static BufferedImage Icomponent(int x){
-        
+    public static BufferedImage ComponenteI(int x){        
         if(x == 0){
-            lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-            applied = true;
-            return meuJFrame.imagem2;
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+            foiAplicado = true;
+            return FramePrincipal.imagemASerExibida;
         }
         else{
-            for (int j = 0; j < meuJFrame.imagem2.getWidth(); j++) {
-                for (int i = 0; i < meuJFrame.imagem2.getHeight(); i++) {
-                    img2structYIQ[i][j].I =  cpystructYIQ[i][j].I + x;
+            for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+                for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
+                    estruturaTemporaria[i][j].I =  estruturaTemporaraCopia[i][j].I + x;
                 }
             }
-            YIQtoRGB();
-            lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-            applied = true;
-            return meuJFrame.imagem2;
+            YIQparaRGB();
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+            foiAplicado = true;
+            return FramePrincipal.imagemASerExibida;
         }
     }
     
-    public static BufferedImage Qcomponent(int x){
-        
+    public static BufferedImage ComponenteQ(int x){        
         if(x == 0){
-            lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-            applied = true;
-            return meuJFrame.imagem2;
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+            foiAplicado = true;
+            return FramePrincipal.imagemASerExibida;
         }
         else{
-            for (int j = 0; j < meuJFrame.imagem2.getWidth(); j++) {
-                for (int i = 0; i < meuJFrame.imagem2.getHeight(); i++) {
-                    img2structYIQ[i][j].Q =  cpystructYIQ[i][j].Q + x;
+            for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+                for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
+                    estruturaTemporaria[i][j].Q =  estruturaTemporaraCopia[i][j].Q + x;
                 }
             }
-            YIQtoRGB();
-            lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-            applied = true;
-            return meuJFrame.imagem2;
+            YIQparaRGB();
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+            foiAplicado = true;
+            return FramePrincipal.imagemASerExibida;
         }
     }
     
     public static void setLabel(JLabel label){
-        lbl = label;
+        labelImagem = label;
     }
     
-    public static void ApplyYIQ(){
-        for (int j = 0; j < meuJFrame.imagem2.getWidth(); j++) {
-            for (int i = 0; i < meuJFrame.imagem2.getHeight(); i++) {
-                Color c = new Color(meuJFrame.imagem2.getRGB(j, i));
+    public static void AplicarYIQ(){
+        for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
+                Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
                 int R = c.getRed();
                 int G = c.getGreen();
                 int B = c.getBlue();
                 c = new Color(R, G, B);
-                meuJFrame.imgcpy.setRGB(j, i, c.getRGB());
-                meuJFrame.imgrevert.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemCopia.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemOriginalRedimensionadaParaReversao.setRGB(j, i, c.getRGB());
             }
         }
-        RGBtoYIQ();
-        HSL.RGBtoHSL();
+        RGBparaYIQ();
+        HSL.RGBparaHSL();
     }
         
     public static void reverterYIQ(){        
-        for (int j = 0; j < meuJFrame.imgrevert.getWidth(); j++) {
-            for (int i = 0; i < meuJFrame.imgrevert.getHeight(); i++) {
-                Color c = new Color(meuJFrame.imgrevert.getRGB(j, i));
+        for (int j = 0; j < FramePrincipal.imagemOriginalRedimensionadaParaReversao.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemOriginalRedimensionadaParaReversao.getHeight(); i++) {
+                Color c = new Color(FramePrincipal.imagemOriginalRedimensionadaParaReversao.getRGB(j, i));
                 int R = c.getRed();
                 int G = c.getGreen();
                 int B = c.getBlue();                               
                 c = new Color(R, G, B);
-                meuJFrame.imagem2.setRGB(j, i, c.getRGB());
-                meuJFrame.imgcpy.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemCopia.setRGB(j, i, c.getRGB());
             }
         }
-        lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-        applied = false;
-        RGBtoYIQ();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        foiAplicado = false;
+        RGBparaYIQ();
     }
     
     public static void cancelarCheck(){
-        for (int j = 0; j < meuJFrame.imgrevert.getWidth(); j++) {
-            for (int i = 0; i < meuJFrame.imgrevert.getHeight(); i++) {
-                Color c = new Color(meuJFrame.imgrevert.getRGB(j, i));
+        for (int j = 0; j < FramePrincipal.imagemOriginalRedimensionadaParaReversao.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemOriginalRedimensionadaParaReversao.getHeight(); i++) {
+                Color c = new Color(FramePrincipal.imagemOriginalRedimensionadaParaReversao.getRGB(j, i));
                 int R = c.getRed();
                 int G = c.getGreen();
                 int B = c.getBlue();                               
                 c = new Color(R, G, B);
-                meuJFrame.imagem2.setRGB(j, i, c.getRGB());
-                meuJFrame.imgcpy.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemCopia.setRGB(j, i, c.getRGB());
             }
         }
-        lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-        RGBtoYIQ();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        RGBparaYIQ();
     }
     
-    public static int yiqid = 4;
-    public static JLabel lbl;
-    public static boolean applied = false;
-    public static StructYIQ[][] img2structYIQ, cpystructYIQ;
+    public static int IdYIQ = 4;
+    public static JLabel labelImagem;
+    public static boolean foiAplicado = false;
+    public static EstruturaYIQ[][] estruturaTemporaria, estruturaTemporaraCopia;
     
-    public static class StructYIQ {            //Estrutura utilizada para armazenar os valores RGB convertidos em YIQ e as incidencias dos valores de Y.
+    public static class EstruturaYIQ {            //Estrutura utilizada para armazenar os valores RGB convertidos em YIQ e as incidencias dos valores de Y.
         int Y;
         int I;
         int Q;

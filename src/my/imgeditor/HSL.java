@@ -16,36 +16,36 @@ import javax.swing.JLabel;
  */
 public class HSL {
     
-    public static void RGBtoHSL(){
+    public static void RGBparaHSL(){
         
-        for(int i = 0; i < meuJFrame.imagem2.getHeight(); i ++){
-            for(int j = 0; j < meuJFrame.imagem2.getWidth(); j ++){
-                Color c = new Color(meuJFrame.imagem2.getRGB(j, i));
-                vet = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), vet);
-                imagem2structHSL[i][j].H = vet[0];
-                imagem2structHSL[i][j].S = vet[1];
-                imagem2structHSL[i][j].L = vet[2];
-                c = new Color(meuJFrame.imgcpy.getRGB(j, i));
-                vet = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), vet);
-                cpystructHSL[i][j].H = vet[0];
-                cpystructHSL[i][j].S = vet[1];
-                cpystructHSL[i][j].L = vet[2];
+        for(int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i ++){
+            for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j ++){
+                Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
+                vetor = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), vetor);
+                estruturaTemporaria[i][j].H = vetor[0];
+                estruturaTemporaria[i][j].S = vetor[1];
+                estruturaTemporaria[i][j].L = vetor[2];
+                c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
+                vetor = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), vetor);
+                estruturaTemporariaCopia[i][j].H = vetor[0];
+                estruturaTemporariaCopia[i][j].S = vetor[1];
+                estruturaTemporariaCopia[i][j].L = vetor[2];
             }            
         }
     }
            
-    public static void HSLtoRGB(){    
+    public static void HSLparaRGB(){    
         
-    for(int i = 0; i < meuJFrame.imagem2.getHeight(); i ++){
-        for(int j = 0; j < meuJFrame.imagem2.getWidth(); j ++){
-            int cor = Color.HSBtoRGB(imagem2structHSL[i][j].H,imagem2structHSL[i][j].S, imagem2structHSL[i][j].L);
+    for(int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i ++){
+        for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j ++){
+            int cor = Color.HSBtoRGB(estruturaTemporaria[i][j].H,estruturaTemporaria[i][j].S, estruturaTemporaria[i][j].L);
             Color c;
             int R = (0xff & (cor >> 16));
             int G = (0xff & (cor >> 8));
             int B = (0xff & cor);
             if(R < 0){
-                    R = 0;
-                }
+                R = 0;
+            }
             if(R > 255){
                 R = 255;
             }
@@ -62,157 +62,156 @@ public class HSL {
                 B = 255;
             }
             c = new Color(R, G, B);
-            meuJFrame.imagem2.setRGB(j, i, c.getRGB());
+            FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }            
         }
     }
     
-    public static BufferedImage Saturation(float x){
+    public static BufferedImage Saturacao(float x){
         
-        float sat;
-        
+        float sat;        
         if(x == 0){
-            lbl.setIcon(new ImageIcon(meuJFrame.imgcpy));
-            applied = true;
-            return meuJFrame.imgcpy;
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
+            foiAplicado = true;
+            return FramePrincipal.imagemCopia;
         }
         else{
-            for(int i = 0; i < meuJFrame.imagem2.getHeight(); i ++){
-                for(int j = 0; j < meuJFrame.imagem2.getWidth();j ++){
-                    sat = cpystructHSL[i][j].S + x/100;
+            for(int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i ++){
+                for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth();j ++){
+                    sat = estruturaTemporariaCopia[i][j].S + x/100;
                     if(sat < 0){
-                        imagem2structHSL[i][j].S = 0;
+                        estruturaTemporaria[i][j].S = 0;
                     }
                     else{
                         if(sat > 1){
-                            imagem2structHSL[i][j].S = 1;
+                            estruturaTemporaria[i][j].S = 1;
                         }
                         else{
-                            imagem2structHSL[i][j].S = sat;
+                            estruturaTemporaria[i][j].S = sat;
                         }
                     }
                 }
             }
-            HSLtoRGB();
-            lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-            applied = true;
-            return meuJFrame.imagem2;
+            HSLparaRGB();
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+            foiAplicado = true;
+            return FramePrincipal.imagemASerExibida;
         }
     }
     
-    public static BufferedImage Hue(float x){
+    public static BufferedImage Matiz(float x){
         
         if(x == 0){
-            lbl.setIcon(new ImageIcon(meuJFrame.imgcpy));
-            applied = true;
-            return meuJFrame.imgcpy;
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
+            foiAplicado = true;
+            return FramePrincipal.imagemCopia;
         }
         else{
-            for (int j = 0; j < meuJFrame.imgcpy.getWidth(); j++) {
-                for (int i = 0; i < meuJFrame.imgcpy.getHeight(); i++) {
-                    imagem2structHSL[i][j].H = cpystructHSL[i][j].H + x/360;
+            for (int j = 0; j < FramePrincipal.imagemCopia.getWidth(); j++) {
+                for (int i = 0; i < FramePrincipal.imagemCopia.getHeight(); i++) {
+                    estruturaTemporaria[i][j].H = estruturaTemporariaCopia[i][j].H + x/360;
                 }
             }
-            HSLtoRGB();
-            lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-            applied = true;
-            return meuJFrame.imagem2;
+            HSLparaRGB();
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+            foiAplicado = true;
+            return FramePrincipal.imagemASerExibida;
         }
     }
     
-    public static BufferedImage Luminance(float x){
+    public static BufferedImage Luminancia(float x){
         
         float lum;
         
         if(x == 0){
-            lbl.setIcon(new ImageIcon(meuJFrame.imgcpy));
-            applied = true;
-            return meuJFrame.imgcpy;
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
+            foiAplicado = true;
+            return FramePrincipal.imagemCopia;
         }
         else{
-            for (int j = 0; j < meuJFrame.imgcpy.getWidth(); j++) {
-                for (int i = 0; i < meuJFrame.imgcpy.getHeight(); i++) {
-                    lum = cpystructHSL[i][j].L + x/100;
+            for (int j = 0; j < FramePrincipal.imagemCopia.getWidth(); j++) {
+                for (int i = 0; i < FramePrincipal.imagemCopia.getHeight(); i++) {
+                    lum = estruturaTemporariaCopia[i][j].L + x/100;
                     if(lum < 0){
-                        imagem2structHSL[i][j].L = 0;
+                        estruturaTemporaria[i][j].L = 0;
                     }
                     else{
                         if(lum > 1){
-                            imagem2structHSL[i][j].L = 1;
+                            estruturaTemporaria[i][j].L = 1;
                         }
                         else{
-                            imagem2structHSL[i][j].L = lum;
+                            estruturaTemporaria[i][j].L = lum;
                         }
                     }
                 }
             }
-            HSLtoRGB();
-            lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-            applied = true;
-            return meuJFrame.imagem2;
+            HSLparaRGB();
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+            foiAplicado = true;
+            return FramePrincipal.imagemASerExibida;
         }
     }
         
     public static void setLabel(JLabel label){
-        lbl = label;
+        labelImagem = label;
     }
     
-    public static void ApplyHSL(){
-        for (int j = 0; j < meuJFrame.imagem2.getWidth(); j++) {
-            for (int i = 0; i < meuJFrame.imagem2.getHeight(); i++) {
-                Color c = new Color(meuJFrame.imagem2.getRGB(j, i));
+    public static void AplicarHSL(){
+        for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
+                Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
                 int R = c.getRed();
                 int G = c.getGreen();
                 int B = c.getBlue();
                 c = new Color(R, G, B);
-                meuJFrame.imgcpy.setRGB(j, i, c.getRGB());
-                meuJFrame.imgrevert.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemCopia.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemOriginalRedimensionadaParaReversao.setRGB(j, i, c.getRGB());
             }
         }
-        RGBtoHSL();
-        YIQ.RGBtoYIQ();
+        RGBparaHSL();
+        YIQ.RGBparaYIQ();
     }
     
     public static void reverterHSL(){        
-        for (int j = 0; j < meuJFrame.imgrevert.getWidth(); j++) {
-            for (int i = 0; i < meuJFrame.imgrevert.getHeight(); i++) {
-                Color c = new Color(meuJFrame.imgrevert.getRGB(j, i));
+        for (int j = 0; j < FramePrincipal.imagemOriginalRedimensionadaParaReversao.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemOriginalRedimensionadaParaReversao.getHeight(); i++) {
+                Color c = new Color(FramePrincipal.imagemOriginalRedimensionadaParaReversao.getRGB(j, i));
                 int R = c.getRed();
                 int G = c.getGreen();
                 int B = c.getBlue();                               
                 c = new Color(R, G, B);
-                meuJFrame.imagem2.setRGB(j, i, c.getRGB());
-                meuJFrame.imgcpy.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemCopia.setRGB(j, i, c.getRGB());
             }
         }
-        lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-        applied = false;
-        RGBtoHSL();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        foiAplicado = false;
+        RGBparaHSL();
     }
     
     public static void cancelarCheck(){
-        for (int j = 0; j < meuJFrame.imgrevert.getWidth(); j++) {
-            for (int i = 0; i < meuJFrame.imgrevert.getHeight(); i++) {
-                Color c = new Color(meuJFrame.imgrevert.getRGB(j, i));
+        for (int j = 0; j < FramePrincipal.imagemOriginalRedimensionadaParaReversao.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemOriginalRedimensionadaParaReversao.getHeight(); i++) {
+                Color c = new Color(FramePrincipal.imagemOriginalRedimensionadaParaReversao.getRGB(j, i));
                 int R = c.getRed();
                 int G = c.getGreen();
                 int B = c.getBlue();                               
                 c = new Color(R, G, B);
-                meuJFrame.imagem2.setRGB(j, i, c.getRGB());
-                meuJFrame.imgcpy.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
+                FramePrincipal.imagemCopia.setRGB(j, i, c.getRGB());
             }
         }
-        lbl.setIcon(new ImageIcon(meuJFrame.imagem2));
-        RGBtoHSL();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        RGBparaHSL();
     }
     
-    public static int HSLid = 3;
-    public static JLabel lbl;
-    public static boolean applied = false;
-    public static StructHSB[][] imagem2structHSL, cpystructHSL;
-    public static float vet[] = new float[3];
+    public static int IdHSL = 3;
+    public static JLabel labelImagem;
+    public static boolean foiAplicado = false;
+    public static EstruturaHSL[][] estruturaTemporaria, estruturaTemporariaCopia;
+    public static float[] vetor = new float[3];
     
-    public static class StructHSB {
+    public static class EstruturaHSL {
         float R;
         float G;
         float B;
