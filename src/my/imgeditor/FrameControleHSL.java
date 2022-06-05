@@ -79,25 +79,10 @@ public class FrameControleHSL extends javax.swing.JFrame {
         });
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
-        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Saturacao(evt);
-            }
-        });
 
         jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 360, 1));
-        jSpinner2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Matiz(evt);
-            }
-        });
 
         jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
-        jSpinner3.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Brilho(evt);
-            }
-        });
 
         jButton6.setBackground(new java.awt.Color(0, 0, 102));
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -230,12 +215,12 @@ public class FrameControleHSL extends javax.swing.JFrame {
         jSpinner1.setValue(0);
         jSpinner2.setValue(0);
         jSpinner3.setValue(0);
-        HSL.foiAplicado = false;
+        framePrincipal.foiAplicado = false;
     }//GEN-LAST:event_Aplicar
 
     private void HSLWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_HSLWindowClosed
-        if(HSL.foiAplicado == true){
-            HSL.foiAplicado = false;
+        if(framePrincipal.foiAplicado == true){
+            framePrincipal.foiAplicado = false;
             FramePrincipal.FrameControleHSL.setEnabled(false);
             FrameControleCheck.codigoOperacao = HSL.IdHSL;
             FramePrincipal.FrameControleCheck.setVisible(true);            
@@ -255,34 +240,19 @@ public class FrameControleHSL extends javax.swing.JFrame {
         HSL.Matiz(x);
     }//GEN-LAST:event_MAT
 
-    private void Saturacao(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Saturacao
-        int x = (int)(jSpinner1.getValue());
-        HSL.Saturacao(x);
-    }//GEN-LAST:event_Saturacao
-
-    private void Matiz(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Matiz
-        int x = (int)(jSpinner2.getValue());
-        HSL.Matiz(x);
-    }//GEN-LAST:event_Matiz
-
     private void BRILHO(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRILHO
         int x = (int)(jSpinner3.getValue());
         HSL.Luminancia(x);
     }//GEN-LAST:event_BRILHO
 
-    private void Brilho(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Brilho
-        int x = (int)(jSpinner3.getValue());
-        HSL.Luminancia(x);
-    }//GEN-LAST:event_Brilho
-
     private void ExibirOriginal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExibirOriginal
-        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imagemOriginalRedimensionadaSemAlteracao));
+        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imageRedimensionadoSemAlteracoes));
         FramePrincipal.ExibirOriginal();
     }//GEN-LAST:event_ExibirOriginal
 
     public void setIconeFrameControleHSL(){
         try{
-            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/ImgEditorImage.png");
+            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/icone.png");
             setIconImage(icone);
         }
         catch(Exception ex){        

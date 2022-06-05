@@ -337,7 +337,7 @@
             <Property name="text" type="java.lang.String" value="Nitidez"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NIT"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Nitidez"/>
           </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinner1">
@@ -346,9 +346,6 @@
               <SpinnerModel initial="0" maximum="100" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="Nitidez"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton12">
           <Properties>

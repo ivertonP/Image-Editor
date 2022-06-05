@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import static my.imgeditor.FramePrincipal.framePrincipal;
 
 /**
  *
@@ -73,7 +74,7 @@ public class Morfologicas {
             }
         }
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        foiAplicado = true;
+        framePrincipal.foiAplicado = true;
         return imagem;
     }
     
@@ -133,8 +134,72 @@ public class Morfologicas {
             }
         }
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        foiAplicado = true;
+        framePrincipal.foiAplicado = true;
+        FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
+        elto.valor = 0;
+        elto.codOp = "rotacao";
+        FramePrincipal.arrayOperacoesTemp.add(elto);
+        System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
         return imagem;
+    }
+    
+    public static BufferedImage Rotacao90Save(){
+        soma = soma + 90;
+        int centroLinha = FramePrincipal.imagemASerSalvaEmDisco.getHeight()/2;
+        int centroColuna = FramePrincipal.imagemASerSalvaEmDisco.getWidth()/2;
+        boolean[][] matrizMapeamentoImagemASerExibida = new boolean[FramePrincipal.imagemASerSalvaEmDisco.getHeight()][FramePrincipal.imagemASerSalvaEmDisco.getWidth()];
+
+        for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
+            for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
+                    matrizMapeamentoImagemASerExibida[i][j] = false;
+                    Color c = new Color(0, 51, 102);
+                    FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
+            }
+        }
+
+        for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
+                Color c = new Color(FramePrincipal.imagemCarregadaDoDisco.getRGB(j, i));
+                int novaLinha = (int) Math.round(centroLinha + (i - centroLinha) * Math.cos(Math.toRadians(soma)) - (j - centroColuna) * Math.sin(Math.toRadians(soma)));
+                int novaColuna = (int) Math.round(centroColuna + (i - centroLinha) * Math.sin(Math.toRadians(soma)) + (j - centroColuna) * Math.cos(Math.toRadians(soma)));
+                if (novaLinha >= 0 && novaLinha < FramePrincipal.imagemASerSalvaEmDisco.getHeight() && novaColuna >= 0 && novaColuna < FramePrincipal.imagemASerSalvaEmDisco.getWidth()) {
+                    FramePrincipal.imagemASerSalvaEmDisco.setRGB(novaColuna, novaLinha, c.getRGB());
+                    matrizMapeamentoImagemASerExibida[novaLinha][novaColuna] = true;
+                }
+            }
+        }
+        
+        for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
+            for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
+                Color c;
+                if(matrizMapeamentoImagemASerExibida[i][j] == false){                    
+                    if((j == 0 && i <= FramePrincipal.imagemASerSalvaEmDisco.getHeight() - 1)){
+                        Color corADireita = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j + 1, i));
+                        c = new Color(corADireita.getRed(), corADireita.getGreen(), corADireita.getBlue());
+                        matrizMapeamentoImagemASerExibida[i][j] = true;
+                        FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
+                    }
+                    else if(j == FramePrincipal.imagemASerSalvaEmDisco.getWidth() - 1 && i <= FramePrincipal.imagemASerSalvaEmDisco.getHeight() - 1){
+                        Color corAEsquerda = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j - 1, i));
+                        c = new Color(corAEsquerda.getRed(), corAEsquerda.getGreen(), corAEsquerda.getBlue());
+                        matrizMapeamentoImagemASerExibida[i][j] = true;
+                        FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
+                    }
+                    else{
+                        Color corAEsquerda = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j - 1, i));
+                        Color corADireita = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j + 1, i));
+                        int R = (corAEsquerda.getRed() + corADireita.getRed()) / 2;
+                        int G = (corAEsquerda.getGreen() + corADireita.getGreen()) / 2;
+                        int B = (corAEsquerda.getBlue() + corADireita.getBlue()) / 2;
+                        c = new Color(R, G, B);
+                        matrizMapeamentoImagemASerExibida[i][j] = true;
+                        FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
+                    }
+                }
+            }
+        }
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        return FramePrincipal.imagemASerSalvaEmDisco;
     }
     
     public static BufferedImage EspelharVertical(){
@@ -155,7 +220,7 @@ public class Morfologicas {
         }
         
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        foiAplicado = true;
+        framePrincipal.foiAplicado = true;
         return imagem;
     }
     
@@ -177,7 +242,7 @@ public class Morfologicas {
         }
         
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        foiAplicado = true;
+        framePrincipal.foiAplicado = true;
         return imagem;
     }
     
@@ -453,9 +518,25 @@ public class Morfologicas {
                 FramePrincipal.imagemOriginalRedimensionadaParaReversao.setRGB(j, i, c.getRGB());
             }
         }
+        
         YIQ.RGBparaYIQ();
         HSL.RGBparaHSL();
         soma = 0;
+        
+        for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
+            eltoTemp = FramePrincipal.arrayOperacoesTemp.get(i);
+            FramePrincipal.arrayOperacoesDefinit.add(eltoTemp);
+            FramePrincipal.arrayOperacoesCopia.add(eltoTemp);
+            System.out.println("\n------------------- Atualização dos arrays -------------------");
+            for(int j = 0; j < FramePrincipal.arrayOperacoesDefinit.size(); j++){
+               System.out.println("Array Definit[" + j + "]: " + FramePrincipal.arrayOperacoesDefinit.get(j).codOp + ", " + FramePrincipal.arrayOperacoesDefinit.get(j).valor);
+            }
+            for(int k = 0; k < FramePrincipal.arrayOperacoesCopia.size(); k++){
+               System.out.println("Array Cópia[" + k + "]: " + FramePrincipal.arrayOperacoesCopia.get(k).codOp + ", " + FramePrincipal.arrayOperacoesCopia.get(k).valor);
+            }
+            System.out.println("\n");
+        }
+        FramePrincipal.arrayOperacoesTemp.clear();
     }
     
     public static void reverterMorfologicas(){        
@@ -470,9 +551,15 @@ public class Morfologicas {
                 FramePrincipal.imagemCopia.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        foiAplicado = false;
+        framePrincipal.foiAplicado = false;
         soma = 0;
+        
+        FramePrincipal.arrayOperacoesTemp.clear();
+        if(FramePrincipal.arrayOperacoesTemp.isEmpty()){
+            System.out.println("Array vazio.");
+        }
     }
     
     public static void cancelarCheck(){
@@ -487,8 +574,14 @@ public class Morfologicas {
                 FramePrincipal.imagemCopia.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         soma = 0;
+        
+        FramePrincipal.arrayOperacoesTemp.clear();
+        if(FramePrincipal.arrayOperacoesTemp.isEmpty()){
+            System.out.println("Array vazio.");
+        }
     }
     
     public static void setLabel(JLabel label){
@@ -497,9 +590,9 @@ public class Morfologicas {
     
     public static BufferedImage imagem;
     public static JLabel labelImagem;
-    public static boolean foiAplicado = false;
     public static int IdMorfologicas = 5;
     public static int soma = 0;
+    public static FramePrincipal.Operacao eltoTemp = new FramePrincipal.Operacao();
     
     static class EstruturaRGB {
         double r;

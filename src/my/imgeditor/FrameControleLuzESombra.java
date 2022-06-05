@@ -115,11 +115,6 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
         );
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
-        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Brilho(evt);
-            }
-        });
 
         jButton4.setBackground(new java.awt.Color(0, 0, 102));
         jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -132,11 +127,6 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
         });
 
         jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
-        jSpinner2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Luminosidade(evt);
-            }
-        });
 
         jButton5.setBackground(new java.awt.Color(0, 0, 102));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -149,11 +139,6 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
         });
 
         jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
-        jSpinner3.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Gama(evt);
-            }
-        });
 
         jButton6.setBackground(new java.awt.Color(0, 0, 102));
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -218,8 +203,8 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FrameFechado(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FrameFechado
-        if(LuzESombra.foiAplicado == true){
-            LuzESombra.foiAplicado = false;
+        if(framePrincipal.foiAplicado == true){
+            framePrincipal.foiAplicado = false;
             FramePrincipal.FrameControleLuzESombra.setEnabled(false);
             FrameControleCheck.codigoOperacao = LuzESombra.IdLuzESombra;
             FramePrincipal.FrameControleCheck.setVisible(true);
@@ -234,7 +219,7 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
         jSpinner1.setValue(0);
         jSpinner2.setValue(0);
         jSpinner3.setValue(0);
-        LuzESombra.foiAplicado = false;
+        framePrincipal.foiAplicado = false;
     }//GEN-LAST:event_Aplicar
 
     private void Reverter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reverter
@@ -245,24 +230,9 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
     }//GEN-LAST:event_Reverter
 
     private void ExibirOriginal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExibirOriginal
-        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imagemOriginalRedimensionadaSemAlteracao));
+        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imageRedimensionadoSemAlteracoes));
         FramePrincipal.ExibirOriginal();
     }//GEN-LAST:event_ExibirOriginal
-
-    private void Brilho(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Brilho
-        int x = (int)jSpinner1.getValue();
-        LuzESombra.Brilho(x);
-    }//GEN-LAST:event_Brilho
-
-    private void Luminosidade(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Luminosidade
-        int x = (int)jSpinner2.getValue();
-        LuzESombra.Luminosidade(x);
-    }//GEN-LAST:event_Luminosidade
-
-    private void Gama(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Gama
-        int x = (int)jSpinner3.getValue();
-        LuzESombra.Gamma(x);
-    }//GEN-LAST:event_Gama
 
     private void BRILHO(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BRILHO
         int x = (int)jSpinner1.getValue();
@@ -281,7 +251,7 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
 
     public void setIconeFrameControleLuzESombra(){
         try{
-            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/ImgEditorImage.png");
+            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/icone.png");
             setIconImage(icone);
         }
         catch(Exception ex){        

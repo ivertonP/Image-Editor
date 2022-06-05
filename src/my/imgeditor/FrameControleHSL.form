@@ -135,9 +135,6 @@
               <SpinnerModel initial="0" maximum="100" minimum="-100" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="Saturacao"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinner2">
           <Properties>
@@ -145,9 +142,6 @@
               <SpinnerModel initial="0" maximum="360" minimum="0" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="Matiz"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinner3">
           <Properties>
@@ -155,9 +149,6 @@
               <SpinnerModel initial="0" maximum="100" minimum="-100" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="Brilho"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton6">
           <Properties>

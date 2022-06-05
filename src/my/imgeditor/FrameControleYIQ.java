@@ -116,25 +116,10 @@ public class FrameControleYIQ extends javax.swing.JFrame {
         );
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, -255, 255, 1));
-        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Luminancia(evt);
-            }
-        });
 
         jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, -127, 127, 1));
-        jSpinner2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                InPhase(evt);
-            }
-        });
 
         jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, -127, 127, 1));
-        jSpinner3.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Quadrature(evt);
-            }
-        });
 
         jButton1.setBackground(new java.awt.Color(0, 0, 102));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -233,21 +218,6 @@ public class FrameControleYIQ extends javax.swing.JFrame {
         YIQ.ComponenteI(x);
     }//GEN-LAST:event_INPHASE
 
-    private void Luminancia(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Luminancia
-        int x = (int) jSpinner1.getValue();
-        YIQ.ComponenteY(x);
-    }//GEN-LAST:event_Luminancia
-
-    private void InPhase(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_InPhase
-        int x = (int) jSpinner2.getValue();
-        YIQ.ComponenteI(x);
-    }//GEN-LAST:event_InPhase
-
-    private void Quadrature(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Quadrature
-        int x = (int) jSpinner3.getValue();
-        YIQ.ComponenteQ(x);
-    }//GEN-LAST:event_Quadrature
-
     private void reverterYIQ(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reverterYIQ
         jSpinner1.setValue(0);
         jSpinner2.setValue(0);
@@ -260,17 +230,17 @@ public class FrameControleYIQ extends javax.swing.JFrame {
         jSpinner1.setValue(0);
         jSpinner2.setValue(0);
         jSpinner3.setValue(0);
-        YIQ.foiAplicado = false;
+        framePrincipal.foiAplicado = false;
     }//GEN-LAST:event_Aplicar
 
     private void ExibirOriginal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExibirOriginal
-        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imagemOriginalRedimensionadaSemAlteracao));
+        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imageRedimensionadoSemAlteracoes));
         FramePrincipal.ExibirOriginal();
     }//GEN-LAST:event_ExibirOriginal
 
     private void YIQWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_YIQWindowClosed
-        if(YIQ.foiAplicado == true){
-            YIQ.foiAplicado = false;
+        if(framePrincipal.foiAplicado == true){
+            framePrincipal.foiAplicado = false;
             FramePrincipal.FrameControleYIQ.setEnabled(false);
             FrameControleCheck.codigoOperacao = YIQ.IdYIQ;
             FramePrincipal.FrameControleCheck.setVisible(true);            
@@ -282,7 +252,7 @@ public class FrameControleYIQ extends javax.swing.JFrame {
 
     public void setIconeFrameControleYIQ(){
         try{
-            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/ImgEditorImage.png");
+            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/icone.png");
             setIconImage(icone);
         }
         catch(Exception ex){        

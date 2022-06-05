@@ -35,8 +35,6 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jSpinner1 = new javax.swing.JSpinner();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -55,23 +53,6 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
         });
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
-
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 360, 1));
-        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Rotacao(evt);
-            }
-        });
-
-        jButton1.setBackground(new java.awt.Color(0, 0, 102));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 255, 255));
-        jButton1.setText("Rotacionar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ROTACIONAR(evt);
-            }
-        });
 
         jPanel2.setBackground(new java.awt.Color(0, 51, 102));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -133,7 +114,7 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
         jButton5.setBackground(new java.awt.Color(0, 0, 102));
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton5.setForeground(new java.awt.Color(0, 255, 255));
-        jButton5.setText("90 °");
+        jButton5.setText("Rotação 90 °");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Rotacao90(evt);
@@ -166,25 +147,18 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(109, 109, 109)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton5))
+                .addGap(31, 31, 31)
+                .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(jButton6)
                 .addGap(18, 18, 18)
@@ -208,25 +182,18 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Rotacao(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Rotacao
-        int x = (int) jSpinner1.getValue();
-        Morfologicas.Rotacao(x);
-    }//GEN-LAST:event_Rotacao
-
     private void Aplicar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Aplicar
         Morfologicas.AplicarMorfologicas();
-        jSpinner1.setValue(0);
-        Morfologicas.foiAplicado = false;
+        framePrincipal.foiAplicado = false;
     }//GEN-LAST:event_Aplicar
 
     private void Reverter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reverter
-        jSpinner1.setValue(0);
         Morfologicas.reverterMorfologicas();
     }//GEN-LAST:event_Reverter
 
     private void MorphWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_MorphWindowClosed
-        if(Morfologicas.foiAplicado == true){
-            Morfologicas.foiAplicado = false;
+        if(framePrincipal.foiAplicado == true){
+            framePrincipal.foiAplicado = false;
             FramePrincipal.FrameControleMorfologico.setEnabled(false);
             FrameControleCheck.codigoOperacao = Morfologicas.IdMorfologicas;
             FramePrincipal.FrameControleCheck.setVisible(true);
@@ -237,7 +204,7 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
     }//GEN-LAST:event_MorphWindowClosed
 
     private void ExibirOriginal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExibirOriginal
-        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imagemOriginalRedimensionadaSemAlteracao));
+        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imageRedimensionadoSemAlteracoes));
         FramePrincipal.ExibirOriginal();
     }//GEN-LAST:event_ExibirOriginal
 
@@ -253,14 +220,9 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
         Morfologicas.EspelharHorizontal();
     }//GEN-LAST:event_EspelharHorizontal
 
-    private void ROTACIONAR(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ROTACIONAR
-        int x = (int) jSpinner1.getValue();
-        Morfologicas.Rotacao(x);
-    }//GEN-LAST:event_ROTACIONAR
-
     public void setIconeFrameControleMorfologico(){
         try{
-            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/ImgEditorImage.png");
+            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/icone.png");
             setIconImage(icone);
         }
         catch(Exception ex){        
@@ -307,7 +269,6 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -316,6 +277,5 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSpinner jSpinner1;
     // End of variables declaration//GEN-END:variables
 }

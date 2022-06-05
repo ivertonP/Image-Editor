@@ -180,16 +180,11 @@ public class FrameControleFiltros extends javax.swing.JFrame {
         jButton9.setText("Nitidez");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NIT(evt);
+                Nitidez(evt);
             }
         });
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 100, 1));
-        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                Nitidez(evt);
-            }
-        });
 
         jButton12.setBackground(new java.awt.Color(0, 0, 102));
         jButton12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -304,21 +299,21 @@ public class FrameControleFiltros extends javax.swing.JFrame {
     private void Aplicar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Aplicar
         Filtros.AplicarFiltros();
         jSpinner1.setValue(0);
-        jTextField2.setText("0");
-        jTextField1.setText("0");
-        Filtros.foiAplicado = false;
+        jTextField2.setText("");
+        jTextField1.setText("");
+        framePrincipal.foiAplicado = false;
     }//GEN-LAST:event_Aplicar
 
     private void Reverter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reverter
         jSpinner1.setValue(0);
-        jTextField2.setText("0");
-        jTextField1.setText("0");
+        jTextField2.setText("");
+        jTextField1.setText("");
         Filtros.reverterFiltros();
     }//GEN-LAST:event_Reverter
 
     private void FrameFechado(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FrameFechado
-        if(Filtros.foiAplicado == true){
-            Filtros.foiAplicado = false;
+        if(framePrincipal.foiAplicado == true){
+            framePrincipal.foiAplicado = false;
             FramePrincipal.FrameControleFiltros.setEnabled(false);
             FrameControleCheck.codigoOperacao = Filtros.IdFiltros;
             FramePrincipal.FrameControleCheck.setVisible(true);
@@ -337,19 +332,14 @@ public class FrameControleFiltros extends javax.swing.JFrame {
     }//GEN-LAST:event_PeB
 
     private void ExibirOriginal(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExibirOriginal
-        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imagemOriginalRedimensionadaSemAlteracao));
+        FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imageRedimensionadoSemAlteracoes));
         FramePrincipal.ExibirOriginal();
     }//GEN-LAST:event_ExibirOriginal
 
-    private void Nitidez(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Nitidez
-        int x = (int)jSpinner1.getValue();
-        Filtros.Nitidez(x);
+    private void Nitidez(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Nitidez
+        nitaction = (int)jSpinner1.getValue();
+        Filtros.Nitidez(nitaction);
     }//GEN-LAST:event_Nitidez
-
-    private void NIT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NIT
-        int x = (int)jSpinner1.getValue();
-        Filtros.Nitidez(x);
-    }//GEN-LAST:event_NIT
 
     private void Pontilhado(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pontilhado
         Filtros.Pontilhado();
@@ -357,7 +347,7 @@ public class FrameControleFiltros extends javax.swing.JFrame {
 
     public void setIconeFrameControleFiltros(){
         try{
-            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/ImgEditorImage.png");
+            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/icone.png");
             setIconImage(icone);
         }
         catch(Exception ex){        
@@ -419,4 +409,7 @@ public class FrameControleFiltros extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
+
+    private int nitaction;
+    private int nitspinner;
 }
