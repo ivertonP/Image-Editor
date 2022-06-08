@@ -19,7 +19,8 @@ public class HSL {
     
     public static void RGBparaHSL(){        
         for(int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i ++){
-            for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j ++){
+            for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j ++){                
+                //VERSÃO ORIGINAL
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
                 vetor = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), vetor);
                 estruturaTemporaria[i][j].H = vetor[0];
@@ -36,12 +37,15 @@ public class HSL {
     
     public static void RGBparaHSLSave(){        
         for(int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i ++){
-            for(int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j ++){
+            for(int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j ++){                
+                //VERSÃO ORIGINAL
                 Color c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
                 vetor = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), vetor);
                 estruturaTemporariaSave[i][j].H = vetor[0];
                 estruturaTemporariaSave[i][j].S = vetor[1];
                 estruturaTemporariaSave[i][j].L = vetor[2];
+                
+                //VERSÃO ORIGINAL
                 c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
                 vetor = Color.RGBtoHSB(c.getRed(), c.getGreen(), c.getBlue(), vetor);
                 estruturaTemporariaCopiaSave[i][j].H = vetor[0];
@@ -53,7 +57,8 @@ public class HSL {
            
     public static void HSLparaRGB(){        
     for(int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i ++){
-        for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j ++){
+        for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j ++){            
+            //VERSÃO ORIGINAL
             int cor = Color.HSBtoRGB(estruturaTemporaria[i][j].H, estruturaTemporaria[i][j].S, estruturaTemporaria[i][j].L);
             Color c;
             int R = (0xff & (cor >> 16));
@@ -86,8 +91,10 @@ public class HSL {
     public static void HSLparaRGBSave(){        
     for(int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i ++){
         for(int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j ++){
+            //VERSÃO ORIGINAL
             int cor = Color.HSBtoRGB(estruturaTemporariaSave[i][j].H, estruturaTemporariaSave[i][j].S, estruturaTemporariaSave[i][j].L);
             Color c;
+            
             int R = (0xff & (cor >> 16));
             int G = (0xff & (cor >> 8));
             int B = (0xff & cor);
@@ -125,7 +132,8 @@ public class HSL {
         }
         else{
             for(int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i ++){
-                for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth();j ++){
+                for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth();j ++){                    
+                    //VERSÃO ORIGINAL
                     sat = estruturaTemporariaCopia[i][j].S + y/100;
                     if(sat < 0){
                         estruturaTemporaria[i][j].S = 0;
@@ -163,7 +171,8 @@ public class HSL {
         else{
             RGBparaHSLSave();
             for(int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i ++){
-                for(int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth();j ++){
+                for(int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth();j ++){                    
+                    //VERSÃO ORIGINAL
                     sat = estruturaTemporariaCopiaSave[i][j].S + y/100;
                     if(sat < 0){
                         estruturaTemporaria[i][j].S = 0;
@@ -381,19 +390,13 @@ public class HSL {
     
     public static int IdHSL = 3;
     public static JLabel labelImagem;
-    //public static boolean foiAplicado = false;
     public static EstruturaHSL[][] estruturaTemporaria, estruturaTemporariaCopia;
     public static EstruturaHSL[][] estruturaTemporariaSave, estruturaTemporariaCopiaSave;
     public static float[] vetor = new float[3];
     public static FramePrincipal.Operacao eltoTemp = new FramePrincipal.Operacao();
     
     public static class EstruturaHSL {
-        float R;
-        float G;
-        float B;
-        float H;
-        float S;
-        float L;
+        float R, G, B, H, S, L;
     }
     
 }

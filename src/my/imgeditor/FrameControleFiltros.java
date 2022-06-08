@@ -347,7 +347,7 @@ public class FrameControleFiltros extends javax.swing.JFrame {
 
     public void setIconeFrameControleFiltros(){
         try{
-            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/icone.png");
+            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/src/resources/icone.png");
             setIconImage(icone);
         }
         catch(Exception ex){        

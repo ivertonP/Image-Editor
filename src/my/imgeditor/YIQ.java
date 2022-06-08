@@ -25,13 +25,18 @@ public class YIQ {
                 int Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                 int I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
                 int Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));
+                
+                //VERSÃO ORIGINAL
                 estruturaTemporaria[i][j].Y = Y;
                 estruturaTemporaria[i][j].I = I;
                 estruturaTemporaria[i][j].Q = Q;
+                
                 c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                 Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                 I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
                 Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));
+                
+                //VERSÃO ORIGINAL
                 estruturaTemporariaCopia[i][j].Y = Y;
                 estruturaTemporariaCopia[i][j].I = I;
                 estruturaTemporariaCopia[i][j].Q = Q;
@@ -42,7 +47,8 @@ public class YIQ {
     public static void RGBparaYIQSave(){
         
         for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-            for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
+            for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {                
+                //VERSÃO ORIGINAL
                 Color c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
                 int Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                 int I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
@@ -50,6 +56,8 @@ public class YIQ {
                 estruturaTemporariaSave[i][j].Y = Y;
                 estruturaTemporariaSave[i][j].I = I;
                 estruturaTemporariaSave[i][j].Q = Q;
+                
+                //VERSÃO ORIGINAL
                 c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
                 Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                 I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
@@ -65,10 +73,11 @@ public class YIQ {
         
         for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {                
+                //VERSÃO ORIGINAL
                 Color c;
                 int R = (int) (estruturaTemporaria[i][j].Y + 0.9563 * estruturaTemporaria[i][j].I + 0.6210 * estruturaTemporaria[i][j].Q);
                 int G = (int) (estruturaTemporaria[i][j].Y - 0.2721 * estruturaTemporaria[i][j].I - 0.6474 * estruturaTemporaria[i][j].Q);
-                int B = (int) (estruturaTemporaria[i][j].Y - 1.1070 * estruturaTemporaria[i][j].I + 1.7046 * estruturaTemporaria[i][j].Q);                
+                int B = (int) (estruturaTemporaria[i][j].Y - 1.1070 * estruturaTemporaria[i][j].I + 1.7046 * estruturaTemporaria[i][j].Q);               
                 if (R < 0) {
                     R = 0;
                 }
@@ -97,10 +106,11 @@ public class YIQ {
         
         for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {                
+                //VERSÃO ORIGINAL
                 Color c;
                 int R = (int) (estruturaTemporariaSave[i][j].Y + 0.9563 * estruturaTemporariaSave[i][j].I + 0.6210 * estruturaTemporariaSave[i][j].Q);
                 int G = (int) (estruturaTemporariaSave[i][j].Y - 0.2721 * estruturaTemporariaSave[i][j].I - 0.6474 * estruturaTemporariaSave[i][j].Q);
-                int B = (int) (estruturaTemporariaSave[i][j].Y - 1.1070 * estruturaTemporariaSave[i][j].I + 1.7046 * estruturaTemporariaSave[i][j].Q);                
+                int B = (int) (estruturaTemporariaSave[i][j].Y - 1.1070 * estruturaTemporariaSave[i][j].I + 1.7046 * estruturaTemporariaSave[i][j].Q);              
                 if (R < 0) {
                     R = 0;
                 }
@@ -346,9 +356,7 @@ public class YIQ {
     public static FramePrincipal.Operacao eltoTemp = new FramePrincipal.Operacao();
     
     public static class EstruturaYIQ {            //Estrutura utilizada para armazenar os valores RGB convertidos em YIQ e as incidencias dos valores de Y.
-        int Y;
-        int I;
-        int Q;
+        int Y, I, Q;
     }
     
 }

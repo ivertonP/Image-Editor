@@ -5,35 +5,23 @@
  */
 package my.imgeditor;
 
-//import javax.swing.ImageIcon;
-
 import java.awt.Image;
 import java.awt.Toolkit;
-
+import static my.imgeditor.FramePrincipal.framePrincipal;
 
 /**
  *
- * @author Iverton Perboyre L. Maia
+ * @author ivert
  */
-public class FrameControleHistogramas extends javax.swing.JFrame {
+public class LoadHSLFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form HistFrame
+     * Creates new form LoadHSL
      */
-    public FrameControleHistogramas() {
+    public LoadHSLFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        setIconeFrameControleHistogramas();
-    }
-    
-    public void setIconeFrameControleHistogramas(){
-        try{
-            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/src/resources/icone.png");
-            setIconImage(icone);
-        }
-        catch(Exception ex){        
-        }
-        
+        setIconeLoadHSLFrame();
     }
 
     /**
@@ -45,39 +33,32 @@ public class FrameControleHistogramas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        HistPanel = my.imgeditor.FramePrincipal.getPanelOriginal();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Histograma");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("Carregando configs. HSL");
         setAlwaysOnTop(true);
-        setBackground(new java.awt.Color(0, 102, 102));
-
-        HistPanel.setBackground(new java.awt.Color(0, 51, 102));
-
-        javax.swing.GroupLayout HistPanelLayout = new javax.swing.GroupLayout(HistPanel);
-        HistPanel.setLayout(HistPanelLayout);
-        HistPanelLayout.setHorizontalGroup(
-            HistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 585, Short.MAX_VALUE)
-        );
-        HistPanelLayout.setVerticalGroup(
-            HistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
-        );
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                FrameFechado(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(HistPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 325, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(HistPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void FrameFechado(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FrameFechado
+        framePrincipal = framePrincipal.HabilitarEDesabilitarMeuJFrame(framePrincipal, true);
+    }//GEN-LAST:event_FrameFechado
 
     /**
      * @param args the command line arguments
@@ -96,26 +77,35 @@ public class FrameControleHistogramas extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameControleHistogramas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoadHSLFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameControleHistogramas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoadHSLFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameControleHistogramas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoadHSLFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameControleHistogramas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoadHSLFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new FrameControleHistogramas().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LoadHSLFrame().setVisible(true);
+            }
         });
+    }
+    
+    public void setIconeLoadHSLFrame(){
+        try{
+            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/src/resources/icone.png");
+            setIconImage(icone);
+        }
+        catch(Exception ex){        
+        }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel HistPanel;
     // End of variables declaration//GEN-END:variables
 }

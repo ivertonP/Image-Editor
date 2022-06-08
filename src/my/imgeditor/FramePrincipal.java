@@ -258,8 +258,10 @@ public class FramePrincipal extends javax.swing.JFrame {
             File arquivo = seletorDeArquivo.getSelectedFile();
             caminho = arquivo.getPath();
             try {
-                framePrincipal = framePrincipal.HabilitarEDesabilitarMeuJFrame(framePrincipal, false);                                  //Desabilita framePrincipal para habilitar o progressFrame
-                progressFrame.setVisible(true);                                                                                         //Exibe o progressFrame
+                framePrincipal = framePrincipal.HabilitarEDesabilitarMeuJFrame(framePrincipal, false);                                //Desabilita framePrincipal para habilitar o progressFrame
+                progressFrame.setVisible(true);                                                                                       //Exibe o progressFrame
+                hsliniciado = false;
+                yiqiniciado = false;
                 imagemCarregadaDoDisco = ImageIO.read(new File(caminho));
                 imagemASerSalvaEmDisco = new BufferedImage(imagemCarregadaDoDisco.getWidth(), imagemCarregadaDoDisco.getHeight(), BufferedImage.TYPE_INT_BGR);
                 imagemOriginalRedimensionadaSemAlteracao = new BufferedImage(imagemCarregadaDoDisco.getWidth(), imagemCarregadaDoDisco.getHeight(), BufferedImage.TYPE_INT_BGR);
@@ -284,7 +286,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AbrirArquivo
 
-    private static BufferedImage RedimensionarImagem(){        
+    private static BufferedImage RedimensionarImagem(){       
         Dimension dimPanel = framePrincipal.getSize();                                               //Método nativo para capturar as dimensões atuais do frame da aplicação
         double alturaTela = dimPanel.getHeight() * 0.85;                                             //a constante 0.85 representa a porcentagem de pixels necessários para preservar a altura do layout da GUI
         double larguraTela = dimPanel.getWidth() * 0.90;                                             //a constante 0.90 representa a porcentagem de pixels necessários para preservar a largura do layout da GUI
@@ -416,7 +418,7 @@ public class FramePrincipal extends javax.swing.JFrame {
                 image = imagemASerSalvaEmDisco.getScaledInstance((int)novaLarguraImg, (int)novaAlturaImg, 100);
                 imageRedimensionadoSemAlteracoes = imagemOriginalRedimensionadaSemAlteracao.getScaledInstance((int)novaLarguraImg, (int)novaAlturaImg, 100);
                 
-                ConstruirImagem();  
+                ConstruirImagem();
             }
             else{                                                                               //Telas quadradas
                 double difAltura = 0;
@@ -482,9 +484,8 @@ public class FramePrincipal extends javax.swing.JFrame {
         }
         return imagemASerExibida; 
     } 
-     
+    
     private static void ConstruirImagem(){   
-        
         imagemASerExibida = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
         imagemCopia = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
         imagemOriginalRedimensionadaParaReversao = new BufferedImage(image.getWidth(null), image.getHeight(null), BufferedImage.TYPE_INT_RGB);
@@ -498,16 +499,13 @@ public class FramePrincipal extends javax.swing.JFrame {
         bGr3.drawImage(image, 0, 0, null);
         bGr1.dispose();
         bGr2.dispose();
-        bGr3.dispose();     
-       
+        bGr3.dispose();
+        
+        //VERSÃO ORIGINAL
         HSL.estruturaTemporaria = new HSL.EstruturaHSL[imagemASerExibida.getHeight()][imagemASerExibida.getWidth()];
         HSL.estruturaTemporariaCopia = new HSL.EstruturaHSL[imagemASerExibida.getHeight()][imagemASerExibida.getWidth()];
-        HSL.estruturaTemporariaSave = new HSL.EstruturaHSL[imagemASerSalvaEmDisco.getHeight()][imagemASerSalvaEmDisco.getWidth()];
-        HSL.estruturaTemporariaCopiaSave = new HSL.EstruturaHSL[imagemASerSalvaEmDisco.getHeight()][imagemASerSalvaEmDisco.getWidth()];
         YIQ.estruturaTemporaria = new YIQ.EstruturaYIQ[imagemASerExibida.getHeight()][imagemASerExibida.getWidth()];
         YIQ.estruturaTemporariaCopia = new YIQ.EstruturaYIQ[imagemASerExibida.getHeight()][imagemASerExibida.getWidth()];
-        YIQ.estruturaTemporariaSave = new YIQ.EstruturaYIQ[imagemASerSalvaEmDisco.getHeight()][imagemASerSalvaEmDisco.getWidth()];
-        YIQ.estruturaTemporariaCopiaSave = new YIQ.EstruturaYIQ[imagemASerSalvaEmDisco.getHeight()][imagemASerSalvaEmDisco.getWidth()];
         
         for (int j = 0; j < imagemASerExibida.getWidth(); j++) {
             for (int i = 0; i < imagemASerExibida.getHeight(); i++) {
@@ -516,22 +514,10 @@ public class FramePrincipal extends javax.swing.JFrame {
                 YIQ.estruturaTemporaria[i][j] = new YIQ.EstruturaYIQ();
                 YIQ.estruturaTemporariaCopia[i][j] = new YIQ.EstruturaYIQ();
             }
-        }        
+        }
         
         HSL.RGBparaHSL();
         YIQ.RGBparaYIQ();
-        
-        for (int j = 0; j < imagemASerSalvaEmDisco.getWidth(); j++) {
-            for (int i = 0; i < imagemASerSalvaEmDisco.getHeight(); i++) {
-                HSL.estruturaTemporariaSave[i][j] = new HSL.EstruturaHSL();
-                HSL.estruturaTemporariaCopiaSave[i][j] = new HSL.EstruturaHSL();
-                YIQ.estruturaTemporariaSave[i][j] = new YIQ.EstruturaYIQ();
-                YIQ.estruturaTemporariaCopiaSave[i][j] = new YIQ.EstruturaYIQ();
-            }
-        }        
-        
-        HSL.RGBparaHSLSave();        
-        YIQ.RGBparaYIQSave();
     }
     
     private void HistogramaOrigem(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistogramaOrigem
@@ -625,6 +611,8 @@ public class FramePrincipal extends javax.swing.JFrame {
                 File arquivo = seletorDeArquivo.getSelectedFile();
                 caminho = arquivo.getPath();
                 try {
+                    framePrincipal = framePrincipal.HabilitarEDesabilitarMeuJFrame(framePrincipal, false);                                  //Desabilita framePrincipal para habilitar o progressFrame
+                    saveFrame.setVisible(true);                                                                                         //Exibe o progressFrame
                     System.out.println("\n------------------- ARRAYS ANTES DE SALVAR -------------------");
                     for(int i = 0; i < FramePrincipal.arrayOperacoesDefinit.size(); i++){
                        System.out.println("Array Definit[" + i + "]: " + FramePrincipal.arrayOperacoesDefinit.get(i).codOp + ", " + FramePrincipal.arrayOperacoesDefinit.get(i).valor);
@@ -701,18 +689,56 @@ public class FramePrincipal extends javax.swing.JFrame {
     private void ExibirHSL(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExibirHSL
         if(imagemCarregadaDoDisco != null){
             framePrincipal = framePrincipal.HabilitarEDesabilitarMeuJFrame(framePrincipal, false);
-            HSL.setLabel(jLabel1);
-            FrameControleHSL = new FrameControleHSL();
-            FrameControleHSL.setVisible(true);
+            if(!hsliniciado){
+                loadHSLFrame.setVisible(true);
+                HSL.estruturaTemporariaSave = new HSL.EstruturaHSL[imagemASerSalvaEmDisco.getHeight()][imagemASerSalvaEmDisco.getWidth()];
+                HSL.estruturaTemporariaCopiaSave = new HSL.EstruturaHSL[imagemASerSalvaEmDisco.getHeight()][imagemASerSalvaEmDisco.getWidth()];
+                for (int j = 0; j < imagemASerSalvaEmDisco.getWidth(); j++) {
+                    for (int i = 0; i < imagemASerSalvaEmDisco.getHeight(); i++) {
+                        HSL.estruturaTemporariaSave[i][j] = new HSL.EstruturaHSL();
+                        HSL.estruturaTemporariaCopiaSave[i][j] = new HSL.EstruturaHSL();
+                    }
+                }
+                HSL.RGBparaHSLSave();
+                HSL.setLabel(jLabel1);
+                FrameControleHSL = new FrameControleHSL();
+                loadHSLFrame.setVisible(false);
+                FrameControleHSL.setVisible(true);
+                hsliniciado = true;
+            }
+            else{
+               HSL.setLabel(jLabel1);
+               FrameControleHSL = new FrameControleHSL();
+               FrameControleHSL.setVisible(true);
+            }
         }
     }//GEN-LAST:event_ExibirHSL
 
     private void ExibirYIQ(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExibirYIQ
         if(imagemCarregadaDoDisco != null){
             framePrincipal = framePrincipal.HabilitarEDesabilitarMeuJFrame(framePrincipal, false);
-            YIQ.setLabel(jLabel1);
-            FrameControleYIQ = new FrameControleYIQ();
-            FrameControleYIQ.setVisible(true);
+            if(!yiqiniciado){
+                loadYIQFrame.setVisible(true);
+                YIQ.estruturaTemporariaSave = new YIQ.EstruturaYIQ[imagemASerSalvaEmDisco.getHeight()][imagemASerSalvaEmDisco.getWidth()];
+                YIQ.estruturaTemporariaCopiaSave = new YIQ.EstruturaYIQ[imagemASerSalvaEmDisco.getHeight()][imagemASerSalvaEmDisco.getWidth()];
+                for (int j = 0; j < imagemASerSalvaEmDisco.getWidth(); j++) {
+                    for (int i = 0; i < imagemASerSalvaEmDisco.getHeight(); i++) {
+                        YIQ.estruturaTemporariaSave[i][j] = new YIQ.EstruturaYIQ();
+                        YIQ.estruturaTemporariaCopiaSave[i][j] = new YIQ.EstruturaYIQ();
+                    }
+                }
+                YIQ.RGBparaYIQSave();
+                YIQ.setLabel(jLabel1);
+                FrameControleYIQ = new FrameControleYIQ();
+                loadYIQFrame.setVisible(false);
+                FrameControleYIQ.setVisible(true);
+                yiqiniciado = true;
+            }
+            else{
+               YIQ.setLabel(jLabel1);
+               FrameControleYIQ = new FrameControleYIQ();
+               FrameControleYIQ.setVisible(true);
+            }
         }
     }//GEN-LAST:event_ExibirYIQ
 
@@ -951,11 +977,14 @@ public class FramePrincipal extends javax.swing.JFrame {
         FrameControleMorfologico = new FrameControleMorfologico();
         FrameControleCheck = new FrameControleCheck();
         progressFrame = new ProgressFrame();
+        saveFrame = new SaveFrame();
+        loadHSLFrame = new LoadHSLFrame();
+        loadYIQFrame = new LoadYIQFrame();
     }
     
     public void setIconeFramePrincipal(){
         try{
-            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/dist/icone.png");
+            Image icone = Toolkit.getDefaultToolkit().getImage("D:/BACKUP SSD/BACKUP INTERMITENTE/LIVROS DA UFERSA/PROJETOS JAVA/Image Editor/src/resources/icone.png");
             setIconImage(icone);
         }
         catch(Exception ex){        
@@ -1014,6 +1043,9 @@ public class FramePrincipal extends javax.swing.JFrame {
     public static ImageIcon icone;
     public static Image image, imageRedimensionadoSemAlteracoes;
     public static ProgressFrame progressFrame;
+    public static SaveFrame saveFrame;
+    public static LoadHSLFrame loadHSLFrame;
+    public static LoadYIQFrame loadYIQFrame;
     public static FrameControleCheck FrameControleCheck;
     public static FrameControleFiltros FrameControleFiltros;
     public static FrameControleRGB FrameControleRGB;
@@ -1044,6 +1076,8 @@ public class FramePrincipal extends javax.swing.JFrame {
                   verificarNegativo = false,
                   foiAplicado = false;
     public static int contNeg = 0;
+    public static boolean hsliniciado = false;
+    public static boolean yiqiniciado = false;
     public static class Operacao {
         int valor;
         String codOp;
