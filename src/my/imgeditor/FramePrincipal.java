@@ -279,13 +279,6 @@ public class FramePrincipal extends javax.swing.JFrame {
                 arrayOperacoesDefinit.clear();
                 arrayOperacoesTemp.clear();
                 arrayOperacoesCopia.clear();
-                arrayOperacoesSatVermelho.clear();
-                arrayOperacoesSatVerde.clear();
-                arrayOperacoesSatAzul.clear();
-                arrayOperacoesSatLaranja.clear();
-                arrayOperacoesSatAmarelo.clear();
-                arrayOperacoesSatCiano.clear();
-                arrayOperacoesSatMagenta.clear();
                 jLabel1.setIcon(new ImageIcon(RedimensionarImagem()));
             } catch (IOException ex) {
                 Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -1130,13 +1123,6 @@ public class FramePrincipal extends javax.swing.JFrame {
     public static ArrayList<Operacao> arrayOperacoesTemp = new ArrayList();
     public static ArrayList<Operacao> arrayOperacoesDefinit = new ArrayList();
     public static ArrayList<Operacao> arrayOperacoesCopia = new ArrayList();
-    public static ArrayList<Operacao> arrayOperacoesSatVermelho = new ArrayList();
-    public static ArrayList<Operacao> arrayOperacoesSatVerde = new ArrayList();
-    public static ArrayList<Operacao> arrayOperacoesSatAzul = new ArrayList();
-    public static ArrayList<Operacao> arrayOperacoesSatLaranja = new ArrayList();
-    public static ArrayList<Operacao> arrayOperacoesSatAmarelo = new ArrayList();
-    public static ArrayList<Operacao> arrayOperacoesSatCiano = new ArrayList();
-    public static ArrayList<Operacao> arrayOperacoesSatMagenta = new ArrayList();
     
     /*
     // Variables declaration - do not modify//GEN-BEGIN:variables

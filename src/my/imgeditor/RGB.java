@@ -832,6 +832,28 @@ public class RGB {
         YIQ.RGBparaYIQ();
         
         for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("vermelhocol")){
+                eltoTempVermelho = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("verdecol")){
+                eltoTempVerde = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("azulcol")){
+                eltoTempAzul = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("temp")){
+                eltoTempTemper = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
+        }
+        
+        for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("vermelhocol") && e.valor != eltoTempVermelho.valor));
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("verdecol") && e.valor != eltoTempVerde.valor));
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("azulcol") && e.valor != eltoTempAzul.valor));
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("temp") && e.valor != eltoTempTemper.valor));
+        }
+        
+        for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
             eltoTemp = FramePrincipal.arrayOperacoesTemp.get(i);
             FramePrincipal.arrayOperacoesDefinit.add(eltoTemp);
             FramePrincipal.arrayOperacoesCopia.add(eltoTemp);
@@ -898,6 +920,10 @@ public class RGB {
     public static int IdRGB = 0;
     public static JLabel labelImagem;
     public static FramePrincipal.Operacao eltoTemp = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempVermelho = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempVerde = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempAzul = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempTemper = new FramePrincipal.Operacao();
     
     public static class EstruturaYIQ {            //Estrutura utilizada para armazenar os valores RGB convertidos em YIQ e as incidencias dos valores de Y.
         int Y;

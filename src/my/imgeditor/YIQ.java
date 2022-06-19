@@ -283,6 +283,24 @@ public class YIQ {
         HSL.RGBparaHSL();
         
         for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("compy")){
+                eltoTempY = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("compi")){
+                eltoTempI = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("compq")){
+                eltoTempQ = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
+        }
+        
+        for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("compy") && e.valor != eltoTempY.valor));
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("compi") && e.valor != eltoTempI.valor));
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("compq") && e.valor != eltoTempQ.valor));
+        }
+        
+        for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
             eltoTemp = FramePrincipal.arrayOperacoesTemp.get(i);
             FramePrincipal.arrayOperacoesDefinit.add(eltoTemp);
             FramePrincipal.arrayOperacoesCopia.add(eltoTemp);
@@ -349,6 +367,9 @@ public class YIQ {
     public static EstruturaYIQ[][] estruturaTemporaria, estruturaTemporariaCopia;
     public static EstruturaYIQ[][] estruturaTemporariaSave, estruturaTemporariaCopiaSave;
     public static FramePrincipal.Operacao eltoTemp = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempY = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempI = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempQ = new FramePrincipal.Operacao();
     
     public static class EstruturaYIQ {            //Estrutura utilizada para armazenar os valores RGB convertidos em YIQ e as incidencias dos valores de Y.
         int Y, I, Q;
