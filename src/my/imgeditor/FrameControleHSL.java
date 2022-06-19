@@ -45,11 +45,29 @@ public class FrameControleHSL extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jSpinner4 = new javax.swing.JSpinner();
+        jSpinner5 = new javax.swing.JSpinner();
+        jSpinner6 = new javax.swing.JSpinner();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jButton11 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
+        jSpinner7 = new javax.swing.JSpinner();
+        jSpinner8 = new javax.swing.JSpinner();
+        jSpinner9 = new javax.swing.JSpinner();
+        jSpinner10 = new javax.swing.JSpinner();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("HSL");
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(0, 51, 102));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 HSLWindowClosed(evt);
@@ -61,7 +79,7 @@ public class FrameControleHSL extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(0, 0, 102));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 255, 255));
-        jButton3.setText("Saturação %");
+        jButton3.setText("Geral %");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SAT(evt);
@@ -81,6 +99,12 @@ public class FrameControleHSL extends javax.swing.JFrame {
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
 
         jSpinner2.setModel(new javax.swing.SpinnerNumberModel(0, 0, 360, 1));
+        jSpinner2.setMinimumSize(new java.awt.Dimension(72, 28));
+        jSpinner2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                Matiz(evt);
+            }
+        });
 
         jSpinner3.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
 
@@ -132,7 +156,7 @@ public class FrameControleHSL extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(83, 83, 83)
                 .addComponent(jButton5)
                 .addGap(15, 15, 15)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,42 +175,232 @@ public class FrameControleHSL extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jSpinner4.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
+        jSpinner4.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                VermelhoSat(evt);
+            }
+        });
+
+        jSpinner5.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
+        jSpinner5.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                VerdeSat(evt);
+            }
+        });
+
+        jSpinner6.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
+        jSpinner6.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                AzulSat(evt);
+            }
+        });
+
+        jButton7.setBackground(new java.awt.Color(0, 0, 102));
+        jButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(0, 255, 255));
+        jButton7.setText("Vermelho %");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VermelhoSAT(evt);
+            }
+        });
+
+        jButton8.setBackground(new java.awt.Color(0, 0, 102));
+        jButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(0, 255, 255));
+        jButton8.setText("Verde %");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerdeSAT(evt);
+            }
+        });
+
+        jButton9.setBackground(new java.awt.Color(0, 0, 102));
+        jButton9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(0, 255, 255));
+        jButton9.setText("Azul %");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AzulSAT(evt);
+            }
+        });
+
+        jButton10.setBackground(new java.awt.Color(0, 0, 102));
+        jButton10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(0, 255, 255));
+        jButton10.setText("Laranja %");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LaranjaSAT(evt);
+            }
+        });
+
+        jButton11.setBackground(new java.awt.Color(0, 0, 102));
+        jButton11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton11.setForeground(new java.awt.Color(0, 255, 255));
+        jButton11.setText("Amarelo %");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AmareloSAT(evt);
+            }
+        });
+
+        jButton12.setBackground(new java.awt.Color(0, 0, 102));
+        jButton12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton12.setForeground(new java.awt.Color(0, 255, 255));
+        jButton12.setText("Magenta %");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MagentaSAT(evt);
+            }
+        });
+
+        jButton13.setBackground(new java.awt.Color(0, 0, 102));
+        jButton13.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton13.setForeground(new java.awt.Color(0, 255, 255));
+        jButton13.setText("Ciano %");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CianoSAT(evt);
+            }
+        });
+
+        jSpinner7.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
+        jSpinner7.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                LaranjaSat(evt);
+            }
+        });
+
+        jSpinner8.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
+        jSpinner8.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                AmareloSat(evt);
+            }
+        });
+
+        jSpinner9.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
+        jSpinner9.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                CianoSat(evt);
+            }
+        });
+
+        jSpinner10.setModel(new javax.swing.SpinnerNumberModel(0, -100, 100, 1));
+        jSpinner10.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                MagentaSat(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel1.setText("SATURAÇÃO");
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel2.setText("BRILHO");
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel3.setText("MATIZ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSpinner7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(jSpinner6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(jSpinner5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(jSpinner4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSpinner9, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                                    .addComponent(jSpinner8, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSpinner10, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jButton13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton11, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton4)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4)
+                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton6))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton11)
+                    .addComponent(jSpinner8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7)
+                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8)
+                    .addComponent(jSpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton13))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton12)
+                    .addComponent(jButton9)
+                    .addComponent(jSpinner6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton10)
+                    .addComponent(jSpinner7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,6 +421,13 @@ public class FrameControleHSL extends javax.swing.JFrame {
         jSpinner1.setValue(0);
         jSpinner2.setValue(0);
         jSpinner3.setValue(0);
+        jSpinner4.setValue(0);
+        jSpinner5.setValue(0);
+        jSpinner6.setValue(0);
+        jSpinner7.setValue(0);
+        jSpinner8.setValue(0);
+        jSpinner9.setValue(0);
+        jSpinner10.setValue(0);
         HSL.reverterHSL();
     }//GEN-LAST:event_Reverter
 
@@ -215,12 +436,19 @@ public class FrameControleHSL extends javax.swing.JFrame {
         jSpinner1.setValue(0);
         jSpinner2.setValue(0);
         jSpinner3.setValue(0);
-        framePrincipal.foiAplicado = false;
+        jSpinner4.setValue(0);
+        jSpinner5.setValue(0);
+        jSpinner6.setValue(0);
+        jSpinner7.setValue(0);
+        jSpinner8.setValue(0);
+        jSpinner9.setValue(0);
+        jSpinner10.setValue(0);
+        FramePrincipal.foiAplicado = false;
     }//GEN-LAST:event_Aplicar
 
     private void HSLWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_HSLWindowClosed
-        if(framePrincipal.foiAplicado == true){
-            framePrincipal.foiAplicado = false;
+        if(FramePrincipal.foiAplicado == true){
+            FramePrincipal.foiAplicado = false;
             FramePrincipal.FrameControleHSL.setEnabled(false);
             FrameControleCheck.codigoOperacao = HSL.IdHSL;
             FramePrincipal.FrameControleCheck.setVisible(true);            
@@ -231,7 +459,7 @@ public class FrameControleHSL extends javax.swing.JFrame {
     }//GEN-LAST:event_HSLWindowClosed
 
     private void SAT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SAT
-        int x = (int)(jSpinner1.getValue());
+        int x = (int)jSpinner1.getValue();
         HSL.Saturacao(x);
     }//GEN-LAST:event_SAT
 
@@ -249,6 +477,81 @@ public class FrameControleHSL extends javax.swing.JFrame {
         FramePrincipal.jLabel1.setIcon(new ImageIcon(FramePrincipal.imageRedimensionadoSemAlteracoes));
         FramePrincipal.ExibirOriginal();
     }//GEN-LAST:event_ExibirOriginal
+
+    private void VermelhoSAT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VermelhoSAT
+        int x = (int)jSpinner4.getValue();
+        HSL.SaturacaoVermelho(x);
+    }//GEN-LAST:event_VermelhoSAT
+
+    private void VerdeSAT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerdeSAT
+        int x = (int)jSpinner5.getValue();
+        HSL.SaturacaoVerde(x);
+    }//GEN-LAST:event_VerdeSAT
+
+    private void AzulSAT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AzulSAT
+        int x = (int)jSpinner6.getValue();
+        HSL.SaturacaoAzul(x);
+    }//GEN-LAST:event_AzulSAT
+
+    private void LaranjaSAT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LaranjaSAT
+        int x = (int)jSpinner7.getValue();
+        HSL.SaturacaoLaranja(x);
+    }//GEN-LAST:event_LaranjaSAT
+
+    private void AmareloSAT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmareloSAT
+        int x = (int)jSpinner8.getValue();
+        HSL.SaturacaoAmarelo(x);
+    }//GEN-LAST:event_AmareloSAT
+
+    private void MagentaSAT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MagentaSAT
+        int x = (int)jSpinner10.getValue();
+        HSL.SaturacaoMagenta(x);
+    }//GEN-LAST:event_MagentaSAT
+
+    private void CianoSAT(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CianoSAT
+        int x = (int)jSpinner9.getValue();
+        HSL.SaturacaoCiano(x);
+    }//GEN-LAST:event_CianoSAT
+        
+    private void VerdeSat(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_VerdeSat
+        int x = (int)jSpinner5.getValue();
+        HSL.SaturacaoVerde(x);
+    }//GEN-LAST:event_VerdeSat
+
+    private void AzulSat(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_AzulSat
+        int x = (int)jSpinner6.getValue();
+        HSL.SaturacaoAzul(x);
+    }//GEN-LAST:event_AzulSat
+
+    private void LaranjaSat(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_LaranjaSat
+        int x = (int)jSpinner7.getValue();
+        HSL.SaturacaoLaranja(x);
+    }//GEN-LAST:event_LaranjaSat
+
+    private void AmareloSat(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_AmareloSat
+        int x = (int)jSpinner8.getValue();
+        HSL.SaturacaoAmarelo(x);
+    }//GEN-LAST:event_AmareloSat
+
+    private void CianoSat(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_CianoSat
+        int x = (int)jSpinner9.getValue();
+        HSL.SaturacaoCiano(x);
+    }//GEN-LAST:event_CianoSat
+
+    private void MagentaSat(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_MagentaSat
+        int x = (int)jSpinner10.getValue();
+        HSL.SaturacaoMagenta(x);
+    }//GEN-LAST:event_MagentaSat
+
+    private void Matiz(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_Matiz
+        int x = (int)(jSpinner2.getValue());
+        HSL.Matiz(x);
+    }//GEN-LAST:event_Matiz
+
+    private void VermelhoSat(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_VermelhoSat
+        int x = (int)jSpinner4.getValue();
+        HSL.SaturacaoVermelho(x);
+    }//GEN-LAST:event_VermelhoSat
 
     public void setIconeFrameControleHSL(){
         try{
@@ -303,15 +606,32 @@ public class FrameControleHSL extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner10;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;
+    private javax.swing.JSpinner jSpinner4;
+    private javax.swing.JSpinner jSpinner5;
+    private javax.swing.JSpinner jSpinner6;
+    private javax.swing.JSpinner jSpinner7;
+    private javax.swing.JSpinner jSpinner8;
+    private javax.swing.JSpinner jSpinner9;
     // End of variables declaration//GEN-END:variables
 }

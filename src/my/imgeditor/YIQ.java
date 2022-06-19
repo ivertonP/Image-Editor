@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import static my.imgeditor.FramePrincipal.framePrincipal;
 
 /**
  *
@@ -17,8 +16,7 @@ import static my.imgeditor.FramePrincipal.framePrincipal;
  */
 public class YIQ {
     
-    public static void RGBparaYIQ(){
-        
+    public static void RGBparaYIQ(){        
         for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
@@ -44,8 +42,7 @@ public class YIQ {
         }        
     }
     
-    public static void RGBparaYIQSave(){
-        
+    public static void RGBparaYIQSave(){        
         for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {                
                 //VERSÃO ORIGINAL
@@ -69,8 +66,7 @@ public class YIQ {
         }        
     }
     
-    public static void YIQparaRGB(){
-        
+    public static void YIQparaRGB(){        
         for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {                
                 //VERSÃO ORIGINAL
@@ -102,8 +98,7 @@ public class YIQ {
         }
     }
     
-    public static void YIQparaRGBSave(){
-        
+    public static void YIQparaRGBSave(){        
         for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {                
                 //VERSÃO ORIGINAL
@@ -138,7 +133,7 @@ public class YIQ {
     public static BufferedImage ComponenteY(int x){        
         if(x == 0){
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemCopia;
         }
         else{
@@ -149,7 +144,7 @@ public class YIQ {
             }
             YIQparaRGB();
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
             elto.valor = x;
             elto.codOp = "compy";
@@ -162,7 +157,7 @@ public class YIQ {
     public static BufferedImage ComponenteYSave(int x){        
         if(x == 0){
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemASerSalvaEmDisco;
         }
         else{
@@ -174,7 +169,7 @@ public class YIQ {
             }
             YIQparaRGBSave();
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
         }
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -182,7 +177,7 @@ public class YIQ {
     public static BufferedImage ComponenteI(int x){        
         if(x == 0){
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemASerExibida;
         }
         else{
@@ -193,7 +188,7 @@ public class YIQ {
             }
             YIQparaRGB();
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
             elto.valor = x;
             elto.codOp = "compi";
@@ -206,7 +201,7 @@ public class YIQ {
     public static BufferedImage ComponenteISave(int x){        
         if(x == 0){
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemASerSalvaEmDisco;
         }
         else{
@@ -218,7 +213,7 @@ public class YIQ {
             }
             YIQparaRGBSave();
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemASerSalvaEmDisco;
         }
     }
@@ -226,7 +221,7 @@ public class YIQ {
     public static BufferedImage ComponenteQ(int x){        
         if(x == 0){
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemASerExibida;
         }
         else{
@@ -237,7 +232,7 @@ public class YIQ {
             }
             YIQparaRGB();
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
             elto.valor = x;
             elto.codOp = "compq";
@@ -250,7 +245,7 @@ public class YIQ {
     public static BufferedImage ComponenteQSave(int x){        
         if(x == 0){
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemASerSalvaEmDisco;
         }
         else{
@@ -262,7 +257,7 @@ public class YIQ {
             }
             YIQparaRGBSave();
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemASerSalvaEmDisco;
         }
     }
@@ -316,7 +311,7 @@ public class YIQ {
             }
         }
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = false;
+        FramePrincipal.foiAplicado = false;
         
         RGBparaYIQ();
         

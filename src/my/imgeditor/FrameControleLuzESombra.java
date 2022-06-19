@@ -49,6 +49,7 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Light - Shadow");
         setAlwaysOnTop(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 FrameFechado(evt);
@@ -203,8 +204,8 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FrameFechado(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_FrameFechado
-        if(framePrincipal.foiAplicado == true){
-            framePrincipal.foiAplicado = false;
+        if(FramePrincipal.foiAplicado == true){
+            FramePrincipal.foiAplicado = false;
             FramePrincipal.FrameControleLuzESombra.setEnabled(false);
             FrameControleCheck.codigoOperacao = LuzESombra.IdLuzESombra;
             FramePrincipal.FrameControleCheck.setVisible(true);
@@ -219,7 +220,7 @@ public class FrameControleLuzESombra extends javax.swing.JFrame {
         jSpinner1.setValue(0);
         jSpinner2.setValue(0);
         jSpinner3.setValue(0);
-        framePrincipal.foiAplicado = false;
+        FramePrincipal.foiAplicado = false;
     }//GEN-LAST:event_Aplicar
 
     private void Reverter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reverter

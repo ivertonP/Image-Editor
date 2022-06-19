@@ -58,6 +58,7 @@ public class FrameControleRGB extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("RGB Channels");
         setAlwaysOnTop(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 RGBWindowClosed(evt);
@@ -323,7 +324,7 @@ public class FrameControleRGB extends javax.swing.JFrame {
     jSpinner2.setValue(0);
     jSpinner3.setValue(0);
     jSpinner4.setValue(0);
-    framePrincipal.foiAplicado = false;
+    FramePrincipal.foiAplicado = false;
     }//GEN-LAST:event_Apply
 
     private void VermelhoCinza(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VermelhoCinza
@@ -351,8 +352,8 @@ public class FrameControleRGB extends javax.swing.JFrame {
     }//GEN-LAST:event_Negativo
 
     private void RGBWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_RGBWindowClosed
-        if(framePrincipal.foiAplicado == true){
-            framePrincipal.foiAplicado = false;
+        if(FramePrincipal.foiAplicado == true){
+            FramePrincipal.foiAplicado = false;
             FramePrincipal.FrameControleRGB.setEnabled(false);
             FrameControleCheck.codigoOperacao = RGB.IdRGB;
             FramePrincipal.FrameControleCheck.setVisible(true);            

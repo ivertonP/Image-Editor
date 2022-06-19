@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import static my.imgeditor.FramePrincipal.framePrincipal;
 
 /**
  *
@@ -73,8 +72,9 @@ public class Morfologicas {
                 }
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         return imagem;
     }
     
@@ -82,8 +82,8 @@ public class Morfologicas {
         soma = soma + 90;
         int centroLinha = FramePrincipal.imagemASerExibida.getHeight()/2;
         int centroColuna = FramePrincipal.imagemASerExibida.getWidth()/2;
-        boolean[][] matrizMapeamentoImagemASerExibida = new boolean[FramePrincipal.imagemASerExibida.getHeight()][FramePrincipal.imagemASerExibida.getWidth()];
-
+        boolean[][] matrizMapeamentoImagemASerExibida = new boolean[FramePrincipal.imagemASerExibida.getHeight()][FramePrincipal.imagemASerExibida.getWidth()];        
+        
         for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
             for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
                     matrizMapeamentoImagemASerExibida[i][j] = false;
@@ -91,7 +91,7 @@ public class Morfologicas {
                     FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
-
+        
         for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
                 Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
@@ -133,8 +133,9 @@ public class Morfologicas {
                 }
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "rotacao";
@@ -198,12 +199,12 @@ public class Morfologicas {
                 }
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
     
-    public static BufferedImage EspelharVertical(){
-        
+    public static BufferedImage EspelharVertical(){        
         imagem = new BufferedImage(FramePrincipal.imagemASerExibida.getWidth(), FramePrincipal.imagemASerExibida.getHeight(), BufferedImage.TYPE_INT_RGB);
         
         for(int i = 0; i < imagem.getHeight(); i++){
@@ -220,12 +221,11 @@ public class Morfologicas {
         }
         
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         return imagem;
     }
     
-    public static BufferedImage EspelharHorizontal(){
-        
+    public static BufferedImage EspelharHorizontal(){        
         imagem = new BufferedImage(FramePrincipal.imagemASerExibida.getWidth(), FramePrincipal.imagemASerExibida.getHeight(), BufferedImage.TYPE_INT_RGB);
         
         for(int i = 0, alturaDaImagem = imagem.getHeight()-1; i < imagem.getHeight(); i++, alturaDaImagem--){
@@ -242,7 +242,7 @@ public class Morfologicas {
         }
         
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         return imagem;
     }
     
@@ -553,7 +553,7 @@ public class Morfologicas {
         }
         
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = false;
+        FramePrincipal.foiAplicado = false;
         soma = 0;
         
         FramePrincipal.arrayOperacoesTemp.clear();

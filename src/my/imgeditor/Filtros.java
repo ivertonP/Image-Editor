@@ -11,7 +11,6 @@ import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import static my.imgeditor.FramePrincipal.framePrincipal;
 
 /**
  *
@@ -23,7 +22,6 @@ public class Filtros {
         //O metodo TonsDeCinza() converte a imagem de entrada em uma imagem representada em escala de cinza.        
         for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
-                //Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
                 int cinza = (int) (0.299 * c.getRed() + 0.587 * c.getGreen() + 0.114 * c.getBlue());
                 c = new Color(cinza, cinza, cinza);
@@ -31,10 +29,10 @@ public class Filtros {
             }
         }
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         return FramePrincipal.imagemASerExibida;
     }
-    
+        
     public static BufferedImage Media(int x) {
         //O metodo Media() suaviza a imagem original, causando borramento através do cálculo da média entre a vizinhança
         //do pixel central da máscara e cada pixel da imagem. A dimensão da mascara deve ser fornecida pelo usuario,
@@ -81,7 +79,6 @@ public class Filtros {
             //Este laco For() aninhado copia a imagem original para estruturaTemporaria1[][] de acordo com os limites da expansao fisica.
             for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
                 for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
-                    //Color c = new Color(FramePrincipal.imagemCopia.getRGB(b, a));
                     Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(b, a));
                     estruturaTemporaria1[i][j].r = c.getRed();
                     estruturaTemporaria1[i][j].g = c.getGreen();
@@ -89,10 +86,8 @@ public class Filtros {
                 }
             }
 
-            /*
-            Estes lacos For() aninhados processam estruturaTemporaria1[][] com a mascara normalizada,
-            aplicando o calculo da media em cada pixel e armazenando em estruturaTemporaria2[][].
-            */
+            //Estes lacos For() aninhados processam estruturaTemporaria1[][] com a mascara normalizada,
+            //aplicando o calculo da media em cada pixel e armazenando em estruturaTemporaria2[][]./
             for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
                 for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
                     for (int a = -(x / 2), c = 0; a <= x / 2; a++, c++) {
@@ -102,6 +97,7 @@ public class Filtros {
                             somab = somab + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].b;
                         }
                     }
+                    
                     estruturaTemporaria2[i][j].r = somar;
                     estruturaTemporaria2[i][j].g = somag;
                     estruturaTemporaria2[i][j].b = somab;
@@ -121,8 +117,9 @@ public class Filtros {
                     FramePrincipal.imagemASerExibida.setRGB(b, a, c.getRGB());
                 }
             }
+            
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
             elto.valor = x;
             elto.codOp = "media";
@@ -169,10 +166,8 @@ public class Filtros {
             }
         }
 
-        /*
-        Estes lacos For() aninhados processam estruturaTemporaria1[][] com a mascara normalizada,
-        aplicando o calculo da media em cada pixel e armazenando em estruturaTemporaria2[][].
-        */
+        //Estes lacos For() aninhados processam estruturaTemporaria1[][] com a mascara normalizada,
+        //aplicando o calculo da media em cada pixel e armazenando em estruturaTemporaria2[][].
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
                 for (int a = -(x / 2), c = 0; a <= x / 2; a++, c++) {
@@ -182,6 +177,7 @@ public class Filtros {
                         somab = somab + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].b;
                     }
                 }
+                
                 estruturaTemporaria2[i][j].r = somar;
                 estruturaTemporaria2[i][j].g = somag;
                 estruturaTemporaria2[i][j].b = somab;
@@ -201,6 +197,7 @@ public class Filtros {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -257,7 +254,6 @@ public class Filtros {
 
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
-                //Color c = new Color(FramePrincipal.imagemCopia.getRGB(b, a));
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(b, a));
                 estruturaTemporaria1[i][j].r = c.getRed();
                 estruturaTemporaria1[i][j].g = c.getGreen();
@@ -267,7 +263,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -293,9 +288,10 @@ public class Filtros {
                 Color c = new Color(R, G, B);
                 FramePrincipal.imagemASerExibida.setRGB(b, a, c.getRGB());
             }
-        }        
+        }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "bartlett";
@@ -331,7 +327,6 @@ public class Filtros {
             }
         }
         
-        
         //Os valores dos pesos da mascara de Bartlett sao pre-definidos,
         //e a matriz permanece fixa e simetrica com dimensões 5x5.
         mascara[0][0].peso = 1.0 / 81.0; mascara[0][1].peso = 2.0 / 81.0;
@@ -365,7 +360,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -391,7 +385,8 @@ public class Filtros {
                 Color c = new Color(R, G, B);
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(b, a, c.getRGB());
             }
-        }        
+        }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -422,18 +417,14 @@ public class Filtros {
             }
         }
         
-        /*
-        Os valores dos pesos da mascara de Bartlett sao pre-definidos,
-        e a matriz permanece fixa e simetrica com dimensões 5x5.
-        */
+        //Os valores dos pesos da mascara de Bartlett sao pre-definidos,
+        //e a matriz permanece fixa e simetrica com dimensões 5x5.
         mascara[0][0].peso = 1.0 / 16.0; mascara[0][1].peso = 2.0 / 16.0; mascara[0][2].peso = 1.0 / 16.0; 
         mascara[1][0].peso = 2.0 / 16.0; mascara[1][1].peso = 4.0 / 16.0; mascara[1][2].peso = 2.0 / 16.0; 
-        mascara[2][0].peso = 1.0 / 16.0; mascara[2][1].peso = 2.0 / 16.0; mascara[2][2].peso = 1.0 / 16.0; 
-        
+        mascara[2][0].peso = 1.0 / 16.0; mascara[2][1].peso = 2.0 / 16.0; mascara[2][2].peso = 1.0 / 16.0;        
 
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
-                //Color c = new Color(FramePrincipal.imagemCopia.getRGB(b, a));
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(b, a));
                 estruturaTemporaria1[i][j].r = c.getRed();
                 estruturaTemporaria1[i][j].g = c.getGreen();
@@ -443,7 +434,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -470,8 +460,9 @@ public class Filtros {
                 FramePrincipal.imagemASerExibida.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "gaussiano";
@@ -506,14 +497,11 @@ public class Filtros {
             }
         }
         
-        /*
-        Os valores dos pesos da mascara de Bartlett sao pre-definidos,
-        e a matriz permanece fixa e simetrica com dimensões 5x5.
-        */
+        //Os valores dos pesos da mascara de Bartlett sao pre-definidos,
+        //e a matriz permanece fixa e simetrica com dimensões 5x5.        
         mascara[0][0].peso = 1.0 / 16.0; mascara[0][1].peso = 2.0 / 16.0; mascara[0][2].peso = 1.0 / 16.0; 
         mascara[1][0].peso = 2.0 / 16.0; mascara[1][1].peso = 4.0 / 16.0; mascara[1][2].peso = 2.0 / 16.0; 
-        mascara[2][0].peso = 1.0 / 16.0; mascara[2][1].peso = 2.0 / 16.0; mascara[2][2].peso = 1.0 / 16.0; 
-        
+        mascara[2][0].peso = 1.0 / 16.0; mascara[2][1].peso = 2.0 / 16.0; mascara[2][2].peso = 1.0 / 16.0;        
 
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++, b++) {
@@ -526,7 +514,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -553,6 +540,7 @@ public class Filtros {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -562,7 +550,6 @@ public class Filtros {
         for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
             for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
-                //Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                 r = ((c.getRed() * 0.393) + (c.getGreen() * 0.769) + (c.getBlue() * 0.189));
                 g = ((c.getRed() * 0.349) + (c.getGreen() * 0.686) + (c.getBlue() * 0.168));
                 b = ((c.getRed() * 0.272) + (c.getGreen() * 0.534) + (c.getBlue() * 0.131));
@@ -592,8 +579,9 @@ public class Filtros {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "sepia";
@@ -636,6 +624,7 @@ public class Filtros {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -679,8 +668,9 @@ public class Filtros {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "peb";
@@ -728,6 +718,7 @@ public class Filtros {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -766,8 +757,7 @@ public class Filtros {
 
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
-                Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(b, a));                
-                //Color c = new Color(FramePrincipal.imagemCopia.getRGB(b, a));
+                Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(b, a));
                 estruturaTemporaria1[i][j].r = c.getRed();
                 estruturaTemporaria1[i][j].g = c.getGreen();
                 estruturaTemporaria1[i][j].b = c.getBlue();
@@ -776,7 +766,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -826,8 +815,9 @@ public class Filtros {
                 FramePrincipal.imagemASerExibida.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "laplaciano";
@@ -879,7 +869,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -929,6 +918,7 @@ public class Filtros {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -965,7 +955,6 @@ public class Filtros {
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(b, a));
-                //Color c = new Color(FramePrincipal.imagemCopia.getRGB(b, a));
                 estruturaTemporaria1[i][j].r = c.getRed();
                 estruturaTemporaria1[i][j].g = c.getGreen();
                 estruturaTemporaria1[i][j].b = c.getBlue();
@@ -979,7 +968,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -1027,7 +1015,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i - a][j - b].r;
@@ -1071,7 +1058,6 @@ public class Filtros {
         //Este laco For() aninhado soma, normaliza e armazena os valores de cada elemento de estruturaTemporaria2[][] e de estruturaTemporaria3[][] em image.
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
-
                 double red = estruturaTemporaria2[i][j].r + estruturaTemporaria3[i][j].r;
                 double green = estruturaTemporaria2[i][j].g + estruturaTemporaria3[i][j].g;
                 double blue = estruturaTemporaria2[i][j].b + estruturaTemporaria3[i][j].b;
@@ -1107,8 +1093,9 @@ public class Filtros {
                 FramePrincipal.imagemASerExibida.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "prewitt";
@@ -1162,7 +1149,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -1210,7 +1196,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i - a][j - b].r;
@@ -1254,7 +1239,6 @@ public class Filtros {
         //Este laco For() aninhado soma, normaliza e armazena os valores de cada elemento de estruturaTemporaria2[][] e de estruturaTemporaria3[][] em image.
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++, b++) {
-
                 double red = estruturaTemporaria2[i][j].r + estruturaTemporaria3[i][j].r;
                 double green = estruturaTemporaria2[i][j].g + estruturaTemporaria3[i][j].g;
                 double blue = estruturaTemporaria2[i][j].b + estruturaTemporaria3[i][j].b;
@@ -1290,6 +1274,7 @@ public class Filtros {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -1324,7 +1309,6 @@ public class Filtros {
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(b, a));
-                //Color c = new Color(FramePrincipal.imagemCopia.getRGB(b, a));
                 estruturaTemporaria1[i][j].r = c.getRed();
                 estruturaTemporaria1[i][j].g = c.getGreen();
                 estruturaTemporaria1[i][j].b = c.getBlue();
@@ -1338,7 +1322,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -1386,7 +1369,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i - a][j - b].r;
@@ -1430,7 +1412,6 @@ public class Filtros {
         //Este laco For() aninhados soma, normaliza e armazena os valores de cada elemento de estruturaTemporaria2[][] e de estruturaTemporaria3[][] em image.
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
-
                 double red = estruturaTemporaria2[i][j].r + estruturaTemporaria3[i][j].r;
                 double green = estruturaTemporaria2[i][j].g + estruturaTemporaria3[i][j].g;
                 double blue = estruturaTemporaria2[i][j].b + estruturaTemporaria3[i][j].b;
@@ -1466,8 +1447,9 @@ public class Filtros {
                 FramePrincipal.imagemASerExibida.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "sobel";
@@ -1519,7 +1501,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -1567,7 +1548,6 @@ public class Filtros {
 
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i - a][j - b].r;
@@ -1611,7 +1591,6 @@ public class Filtros {
         //Este laco For() aninhados soma, normaliza e armazena os valores de cada elemento de estruturaTemporaria2[][] e de estruturaTemporaria3[][] em image.
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++, b++) {
-
                 double red = estruturaTemporaria2[i][j].r + estruturaTemporaria3[i][j].r;
                 double green = estruturaTemporaria2[i][j].g + estruturaTemporaria3[i][j].g;
                 double blue = estruturaTemporaria2[i][j].b + estruturaTemporaria3[i][j].b;
@@ -1647,6 +1626,7 @@ public class Filtros {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -1662,7 +1642,6 @@ public class Filtros {
         int novaDimensaoColuna = FramePrincipal.imagemASerExibida.getWidth() + (dimensaoDaMascara - 1);
         int complementoLinha = novaDimensaoLinha / 2 - (FramePrincipal.imagemASerExibida.getHeight() / 2);
         int complementoColuna = novaDimensaoColuna / 2 - (FramePrincipal.imagemASerExibida.getWidth() / 2);
-
         
         EstruturaRGB[][] estruturaTemporaria1 = new EstruturaRGB[novaDimensaoLinha][novaDimensaoColuna];
         EstruturaRGB[][] estruturaTemporaria2 = new EstruturaRGB[novaDimensaoLinha][novaDimensaoColuna];
@@ -1683,7 +1662,6 @@ public class Filtros {
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(b, a));
-                //Color c = new Color(FramePrincipal.imagemCopia.getRGB(b, a));
                 estruturaTemporaria1[i][j].r = c.getRed();
                 estruturaTemporaria1[i][j].g = c.getGreen();
                 estruturaTemporaria1[i][j].b = c.getBlue();
@@ -1714,7 +1692,6 @@ public class Filtros {
         //Estes lacos For() aninhados aplicam a suavizacao na imagem original utilizando a mascara Gaussiana 5x5 pre-definida.
         for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -1735,7 +1712,6 @@ public class Filtros {
         //Este laco For() aninhado subtrai a imagem borrada da imagem original, obtendo uma imagem composta apenas de bordas.
         for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                 estruturaTemporaria2[i][j].r = estruturaTemporaria1[i][j].r - estruturaTemporaria2[i][j].r;
                 estruturaTemporaria2[i][j].g = estruturaTemporaria1[i][j].g - estruturaTemporaria2[i][j].g;
                 estruturaTemporaria2[i][j].b = estruturaTemporaria1[i][j].b - estruturaTemporaria2[i][j].b;
@@ -1782,7 +1758,7 @@ public class Filtros {
         }
         
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = x;
         elto.codOp = "nitidez";
@@ -1802,7 +1778,6 @@ public class Filtros {
         int novaDimensaoColuna = FramePrincipal.imagemASerSalvaEmDisco.getWidth() + (dimensaoDaMascara - 1);
         int complementoLinha = novaDimensaoLinha / 2 - (FramePrincipal.imagemASerSalvaEmDisco.getHeight() / 2);
         int complementoColuna = novaDimensaoColuna / 2 - (FramePrincipal.imagemASerSalvaEmDisco.getWidth() / 2);
-
         
         EstruturaRGB[][] estruturaTemporaria1 = new EstruturaRGB[novaDimensaoLinha][novaDimensaoColuna];
         EstruturaRGB[][] estruturaTemporaria2 = new EstruturaRGB[novaDimensaoLinha][novaDimensaoColuna];
@@ -1853,7 +1828,6 @@ public class Filtros {
         //Estes lacos For() aninhados aplicam a suavizacao na imagem original utilizando a mascara Gaussiana 5x5 pre-definida.
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(dimensaoDaMascara / 2), c = 0; a <= dimensaoDaMascara / 2; a++, c++) {
                     for (int b = -(dimensaoDaMascara / 2), d = 0; b <= dimensaoDaMascara / 2; b++, d++) {
                         somar = somar + mascara[c][d].peso * estruturaTemporaria1[i + a][j + b].r;
@@ -1874,7 +1848,6 @@ public class Filtros {
         //Este laco For() aninhado subtrai a imagem borrada da imagem original, obtendo uma imagem composta apenas de bordas.
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 estruturaTemporaria2[i][j].r = estruturaTemporaria1[i][j].r - estruturaTemporaria2[i][j].r;
                 estruturaTemporaria2[i][j].g = estruturaTemporaria1[i][j].g - estruturaTemporaria2[i][j].g;
                 estruturaTemporaria2[i][j].b = estruturaTemporaria1[i][j].b - estruturaTemporaria2[i][j].b;
@@ -1918,7 +1891,8 @@ public class Filtros {
                 Color c = new Color(R, G, B);
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(b, a, c.getRGB());
             }
-        }        
+        }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -1957,10 +1931,10 @@ public class Filtros {
                     estruturaTemporaria2[i][j] = new EstruturaRGB();
                 }
             }
+            
             for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
                 for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
                     Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(b, a));
-                    //Color c = new Color(FramePrincipal.imagemCopia.getRGB(b, a));
                     estruturaTemporaria1[i][j].r = c.getRed();
                     estruturaTemporaria1[i][j].g = c.getGreen();
                     estruturaTemporaria1[i][j].b = c.getBlue();
@@ -1971,7 +1945,6 @@ public class Filtros {
             int cont = 0;
             for (int i = complementoLinha; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++) {
                 for (int j = complementoColuna; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++) {
-
                     for (int a = -(x / 2); a <= x / 2; a++) {
                         for (int b = -(x / 2); b <= x / 2; b++) {
                             vetorOrdenadoR[cont] = estruturaTemporaria1[i + a][j + b].r;
@@ -1980,6 +1953,7 @@ public class Filtros {
                             cont ++;
                         }
                     }
+                    
                     Arrays.sort(vetorOrdenadoR);
                     Arrays.sort(vetorOrdenadoG);
                     Arrays.sort(vetorOrdenadoB);
@@ -1989,6 +1963,7 @@ public class Filtros {
                     cont = 0;
                 }
             }
+            
             for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerExibida.getHeight() + complementoLinha; i++, a++) {
                 for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerExibida.getWidth() + complementoColuna; j++, b++) {
                     int R = (int) estruturaTemporaria2[i][j].r;
@@ -1998,8 +1973,9 @@ public class Filtros {
                     FramePrincipal.imagemASerExibida.setRGB(b, a, c.getRGB());
                 }
             }
+            
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
             elto.valor = x;
             elto.codOp = "mediana";
@@ -2028,6 +2004,7 @@ public class Filtros {
                 estruturaTemporaria2[i][j] = new EstruturaRGB();
             }
         }
+        
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++, b++) {
                 Color c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(b, a));
@@ -2041,7 +2018,6 @@ public class Filtros {
         int cont = 0;
         for (int i = complementoLinha; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++) {
             for (int j = complementoColuna; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++) {
-
                 for (int a = -(x / 2); a <= x / 2; a++) {
                     for (int b = -(x / 2); b <= x / 2; b++) {
                         vetorOrdenadoR[cont] = estruturaTemporaria1[i + a][j + b].r;
@@ -2050,6 +2026,7 @@ public class Filtros {
                         cont ++;
                     }
                 }
+                
                 Arrays.sort(vetorOrdenadoR);
                 Arrays.sort(vetorOrdenadoG);
                 Arrays.sort(vetorOrdenadoB);
@@ -2059,6 +2036,7 @@ public class Filtros {
                 cont = 0;
             }
         }
+        
         for (int i = complementoLinha, a = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight() + complementoLinha; i++, a++) {
             for (int j = complementoColuna, b = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth() + complementoColuna; j++, b++) {
                 int R = (int) estruturaTemporaria2[i][j].r;
@@ -2068,22 +2046,28 @@ public class Filtros {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(b, a, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
     
-    public static BufferedImage Pontilhado(){        
+    public static BufferedImage Pontilhado(){
         for(int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++){
             for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++){
-                Color c ;
-                if(i%2==0 && j%2==0){
-                    c = new Color(0, 0, 0);
+                Color c = new Color(0, 0, 0);
+                if((i%2 == 0) && (j%2 != 0)){
                     FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
                 }
+                else{
+                    if((i%2 != 0) && (j%2 == 0)){
+                        FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
+                    }
+                }
             }
-        }
+        }        
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "pontilhado";
@@ -2092,13 +2076,17 @@ public class Filtros {
         return FramePrincipal.imagemASerExibida;
     }
     
-    public static BufferedImage PontilhadoSave(){        
+    public static BufferedImage PontilhadoSave(){
         for(int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++){
             for(int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++){
-                Color c ;
-                if(i%2==0 && j%2==0){
-                    c = new Color(0, 0, 0);
+                Color c = new Color(0, 0, 0);
+                if((i%2 == 0) && (j%2 != 0)){
                     FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
+                }
+                else{
+                    if((i%2 != 0) && (j%2 == 0)){
+                        FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
+                    }
                 }
             }
         }
@@ -2155,7 +2143,7 @@ public class Filtros {
             }
         }
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = false;
+        FramePrincipal.foiAplicado = false;
         
         HSL.RGBparaHSL();
         
@@ -2196,6 +2184,11 @@ public class Filtros {
         double g;
         double b;
         double peso;
+    }
+    
+    static class EstruturaModa {            //Estrutura utilizada para manipular as mascaras e as copias da imagem original.
+        int valor;
+        int qnt;
     }
     
     public static class EstruturaYIQ {            //Estrutura utilizada para armazenar os valores RGB convertidos em YIQ e as incidencias dos valores de Y.

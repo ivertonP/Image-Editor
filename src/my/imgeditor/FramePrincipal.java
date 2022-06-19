@@ -279,6 +279,13 @@ public class FramePrincipal extends javax.swing.JFrame {
                 arrayOperacoesDefinit.clear();
                 arrayOperacoesTemp.clear();
                 arrayOperacoesCopia.clear();
+                arrayOperacoesSatVermelho.clear();
+                arrayOperacoesSatVerde.clear();
+                arrayOperacoesSatAzul.clear();
+                arrayOperacoesSatLaranja.clear();
+                arrayOperacoesSatAmarelo.clear();
+                arrayOperacoesSatCiano.clear();
+                arrayOperacoesSatMagenta.clear();
                 jLabel1.setIcon(new ImageIcon(RedimensionarImagem()));
             } catch (IOException ex) {
                 Logger.getLogger(FramePrincipal.class.getName()).log(Level.SEVERE, null, ex);
@@ -304,12 +311,15 @@ public class FramePrincipal extends javax.swing.JFrame {
         
         int alturaImg = imagemCarregadaDoDisco.getHeight();
         int larguraImg = imagemCarregadaDoDisco.getWidth();
+        double novaAlturaImg = alturaImg;
+        double novaLarguraImg = larguraImg;
+        double difAltura;
+        double difLargura;
 
         if(alturaTela > larguraTela){                                                           //Telas verticalmente retangulares
-            double difAltura = 0;
-            double difLargura = 0;
-            double novaAlturaImg = alturaImg;
-            double novaLarguraImg = larguraImg;                
+            difAltura = 0;
+            difLargura = 0;
+            
             //Este laço while() é executado enquanto uma das dimensões calculadas para a nova imagem for maior que o limite da tela do dispositivo.                
             while((novaAlturaImg > alturaTela) || (novaLarguraImg > larguraTela)){                    
                 //A maior diferença calculada entre as dimensões da imagem e as dimensões equivalentes da tela do dispositivo indicam a dimensão que servirá como base para o redimensionamento da imagem                    
@@ -358,16 +368,13 @@ public class FramePrincipal extends javax.swing.JFrame {
             image = imagemASerSalvaEmDisco.getScaledInstance((int)novaLarguraImg, (int)novaAlturaImg, 100);
             imageRedimensionadoSemAlteracoes = imagemOriginalRedimensionadaSemAlteracao.getScaledInstance((int)novaLarguraImg, (int)novaAlturaImg, 100);
             
-            aplicarOperacoes();
             ConstruirImagem(); 
         }
         else{
             if(larguraTela > alturaTela){                                                       //Telas horizontalmente retangulares
-                double difAltura = 0;
-                double difLargura = 0;
-                double novaAlturaImg = alturaImg;
-                double novaLarguraImg = larguraImg;
-
+                difAltura = 0;
+                difLargura = 0;
+                
                 while((novaAlturaImg > alturaTela) || (novaLarguraImg > larguraTela)){
                     if(novaAlturaImg >= alturaTela){
                         difAltura = novaAlturaImg - alturaTela;
@@ -421,11 +428,9 @@ public class FramePrincipal extends javax.swing.JFrame {
                 ConstruirImagem();
             }
             else{                                                                               //Telas quadradas
-                double difAltura = 0;
-                double difLargura = 0;
-                double novaAlturaImg = alturaImg;
-                double novaLarguraImg = larguraImg;
-
+                difAltura = 0;
+                difLargura = 0;
+                
                 while((novaAlturaImg > alturaTela) || (novaLarguraImg > larguraTela)){                    
                     if(novaAlturaImg >= alturaTela){
                         difAltura = novaAlturaImg - alturaTela;
@@ -477,8 +482,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
                 image = imagemASerSalvaEmDisco.getScaledInstance((int)novaLarguraImg, (int)novaAlturaImg, 100);
                 imageRedimensionadoSemAlteracoes = imagemOriginalRedimensionadaSemAlteracao.getScaledInstance((int)novaLarguraImg, (int)novaAlturaImg, 100);
-                
-                aplicarOperacoes();
+
                 ConstruirImagem(); 
             }
         }
@@ -860,6 +864,27 @@ public class FramePrincipal extends javax.swing.JFrame {
             if(elto.codOp.equals("rotacao")) {
                 imagemASerSalvaEmDisco = Morfologicas.Rotacao90Save();
             }
+            if(elto.codOp.equals("satVermelho")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoVermelhoSave(elto.valor);
+            }
+            if(elto.codOp.equals("satVerde")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoVerdeSave(elto.valor);
+            }
+            if(elto.codOp.equals("satAzul")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoAzulSave(elto.valor);
+            }
+            if(elto.codOp.equals("satLaranja")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoLaranjaSave(elto.valor);
+            }
+            if(elto.codOp.equals("satAmarelo")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoAmareloSave(elto.valor);
+            }
+            if(elto.codOp.equals("satCiano")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoCianoSave(elto.valor);
+            }
+            if(elto.codOp.equals("satMagenta")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoMagentaSave(elto.valor);
+            }
         }
     }
     
@@ -964,6 +989,27 @@ public class FramePrincipal extends javax.swing.JFrame {
             }
             if(elto.codOp.equals("rotacao")) {
                 imagemASerSalvaEmDisco = Morfologicas.Rotacao90Save();
+            }
+            if(elto.codOp.equals("satVermelho")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoVermelhoSave(elto.valor);
+            }
+            if(elto.codOp.equals("satVerde")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoVerdeSave(elto.valor);
+            }
+            if(elto.codOp.equals("satAzul")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoAzulSave(elto.valor);
+            }
+            if(elto.codOp.equals("satLaranja")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoLaranjaSave(elto.valor);
+            }
+            if(elto.codOp.equals("satAmarelo")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoAmareloSave(elto.valor);
+            }
+            if(elto.codOp.equals("satCiano")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoCianoSave(elto.valor);
+            }
+            if(elto.codOp.equals("satMagenta")) {
+                imagemASerSalvaEmDisco = HSL.SaturacaoMagentaSave(elto.valor);
             }
         }
     }
@@ -1075,7 +1121,6 @@ public class FramePrincipal extends javax.swing.JFrame {
                   azulCinza = false,
                   verificarNegativo = false,
                   foiAplicado = false;
-    public static int contNeg = 0;
     public static boolean hsliniciado = false;
     public static boolean yiqiniciado = false;
     public static class Operacao {
@@ -1085,7 +1130,14 @@ public class FramePrincipal extends javax.swing.JFrame {
     public static ArrayList<Operacao> arrayOperacoesTemp = new ArrayList();
     public static ArrayList<Operacao> arrayOperacoesDefinit = new ArrayList();
     public static ArrayList<Operacao> arrayOperacoesCopia = new ArrayList();
-
+    public static ArrayList<Operacao> arrayOperacoesSatVermelho = new ArrayList();
+    public static ArrayList<Operacao> arrayOperacoesSatVerde = new ArrayList();
+    public static ArrayList<Operacao> arrayOperacoesSatAzul = new ArrayList();
+    public static ArrayList<Operacao> arrayOperacoesSatLaranja = new ArrayList();
+    public static ArrayList<Operacao> arrayOperacoesSatAmarelo = new ArrayList();
+    public static ArrayList<Operacao> arrayOperacoesSatCiano = new ArrayList();
+    public static ArrayList<Operacao> arrayOperacoesSatMagenta = new ArrayList();
+    
     /*
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

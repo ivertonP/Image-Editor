@@ -46,6 +46,7 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Morphological");
         setAlwaysOnTop(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 MorphWindowClosed(evt);
@@ -184,7 +185,7 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
 
     private void Aplicar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Aplicar
         Morfologicas.AplicarMorfologicas();
-        framePrincipal.foiAplicado = false;
+        FramePrincipal.foiAplicado = false;
     }//GEN-LAST:event_Aplicar
 
     private void Reverter(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reverter
@@ -192,8 +193,8 @@ public class FrameControleMorfologico extends javax.swing.JFrame {
     }//GEN-LAST:event_Reverter
 
     private void MorphWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_MorphWindowClosed
-        if(framePrincipal.foiAplicado == true){
-            framePrincipal.foiAplicado = false;
+        if(FramePrincipal.foiAplicado == true){
+            FramePrincipal.foiAplicado = false;
             FramePrincipal.FrameControleMorfologico.setEnabled(false);
             FrameControleCheck.codigoOperacao = Morfologicas.IdMorfologicas;
             FramePrincipal.FrameControleCheck.setVisible(true);

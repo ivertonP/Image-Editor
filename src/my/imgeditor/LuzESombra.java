@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import static my.imgeditor.FramePrincipal.framePrincipal;
 
 /**
  *
@@ -36,7 +35,6 @@ public class LuzESombra {
                     for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
                         aux[i][j] = new EstruturaYIQ();
                         Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
-                        //Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                         int Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                         int I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
                         int Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));
@@ -64,7 +62,6 @@ public class LuzESombra {
                 for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
                     for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
                         Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
-                        //Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                         aux[i][j].Y = (int) (0.2126*(c.getRed()+x) + 0.7152*(c.getGreen()+x) + 0.0722*(c.getBlue()+x));
                         int R = (int) (aux[i][j].Y + 0.9563 * aux[i][j].I + 0.6210 * aux[i][j].Q);
                         int G = (int) (aux[i][j].Y - 0.2721 * aux[i][j].I - 0.6474 * aux[i][j].Q);
@@ -97,7 +94,6 @@ public class LuzESombra {
                 for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
                     for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
                         Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
-                        //Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                         double r = c.getRed()/255.0;
                         double g = c.getGreen()/255.0;
                         double b = c.getBlue()/255.0;
@@ -128,7 +124,7 @@ public class LuzESombra {
                 }
             }
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = x;
         elto.codOp = "brilho";
@@ -262,7 +258,6 @@ public class LuzESombra {
         for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
                 Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
-                //Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                 double r = c.getRed()/255.0;
                 double g = c.getGreen()/255.0;
                 double b = c.getBlue()/255.0;
@@ -292,7 +287,7 @@ public class LuzESombra {
             }
         }        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = (int)x;
         elto.codOp = "gamma";
@@ -354,7 +349,7 @@ public class LuzESombra {
     public static BufferedImage Luminosidade(int x){        
         if(x == 0){
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemCopia;
         }
         else{        
@@ -367,7 +362,6 @@ public class LuzESombra {
                 for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
                     aux[i][j] = new EstruturaYIQ();
                     Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
-                    //Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                     int Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                     int I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
                     int Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));
@@ -395,7 +389,6 @@ public class LuzESombra {
             for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
                 for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
                     Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
-                    //Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
                     aux[i][j].Y = (int) (0.2126*(c.getRed()+x) + 0.7152*(c.getGreen()+x) + 0.0722*(c.getBlue()+x));
                     int R = (int) (aux[i][j].Y + 0.9563 * aux[i][j].I + 0.6210 * aux[i][j].Q);
                     int G = (int) (aux[i][j].Y - 0.2721 * aux[i][j].I - 0.6474 * aux[i][j].Q);
@@ -425,7 +418,7 @@ public class LuzESombra {
                 }
             }
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
             elto.valor = (int)x;
             elto.codOp = "luminosidade";
@@ -559,7 +552,7 @@ public class LuzESombra {
             }
         }
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = false;
+        FramePrincipal.foiAplicado = false;
         
         HSL.RGBparaHSL();
         

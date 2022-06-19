@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import static my.imgeditor.FramePrincipal.framePrincipal;
 
 /**
  *
@@ -17,8 +16,7 @@ import static my.imgeditor.FramePrincipal.framePrincipal;
  */
 public class RGB {
         
-    public static BufferedImage TomDeCinzaSDGM(){
-        
+    public static BufferedImage TomDeCinzaSDGM(){        
         //O metodo TonsDeCinzaSDGM() converte a imagem de entrada em uma imagem representada em escala de cinza.        
         for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
@@ -28,14 +26,14 @@ public class RGB {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         FramePrincipal.vermelhoCinza = true;
         FramePrincipal.verdeCinza = true;
         FramePrincipal.azulCinza = true;
         return FramePrincipal.imagemASerExibida;
     }
     
-    public static BufferedImage TomDeCinza(){
-        
+    public static BufferedImage TomDeCinza(){        
         //O metodo TonsDeCinza() converte a imagem de entrada em uma imagem representada em escala de cinza.        
         for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
@@ -45,8 +43,9 @@ public class RGB {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.vermelhoCinza = true;
         FramePrincipal.verdeCinza = true;
         FramePrincipal.azulCinza = true;
@@ -58,8 +57,7 @@ public class RGB {
         return FramePrincipal.imagemASerExibida;
     }
     
-    public static BufferedImage TomDeCinzaSave(){
-        
+    public static BufferedImage TomDeCinzaSave(){        
         //O metodo TonsDeCinza() converte a imagem de entrada em uma imagem representada em escala de cinza.        
         for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
@@ -69,6 +67,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -79,7 +78,7 @@ public class RGB {
         
         if(x == 0){
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemCopia;
         }
         else{            
@@ -125,8 +124,9 @@ public class RGB {
                     FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
                 }
             }
+            
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
             elto.valor = x;
             elto.codOp = "temp";
@@ -142,7 +142,7 @@ public class RGB {
         
         if(x == 0){
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             return FramePrincipal.imagemASerSalvaEmDisco;
         }
         else{            
@@ -188,6 +188,7 @@ public class RGB {
                     FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
                 }
             }
+            
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
             return FramePrincipal.imagemASerSalvaEmDisco;
         }
@@ -213,8 +214,9 @@ public class RGB {
                 }
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = x;
         elto.codOp = "vermelhocol";
@@ -239,6 +241,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, corDaCopia.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -262,14 +265,16 @@ public class RGB {
                     FramePrincipal.imagemASerExibida.setRGB(j, i, corDaCopia.getRGB());
                 }
             }
+            
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
             elto.valor = x;
             elto.codOp = "verdecol";
             FramePrincipal.arrayOperacoesTemp.add(elto);
             System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
         }
+        
         return FramePrincipal.imagemASerExibida;
     }
     
@@ -289,6 +294,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, corDaCopia.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -312,14 +318,16 @@ public class RGB {
                     FramePrincipal.imagemASerExibida.setRGB(j, i, corDaCopia.getRGB());
                 }
             }
+            
             labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            framePrincipal.foiAplicado = true;
+            FramePrincipal.foiAplicado = true;
             FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
             elto.valor = x;
             elto.codOp = "azulcol";
             FramePrincipal.arrayOperacoesTemp.add(elto);
             System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
         }
+        
         return FramePrincipal.imagemASerExibida;
     }
     
@@ -339,6 +347,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, corDaCopia.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -351,9 +360,10 @@ public class RGB {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         FramePrincipal.vermelhoCinza = true;
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "vermelhocinza";
@@ -370,6 +380,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -382,9 +393,10 @@ public class RGB {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         FramePrincipal.verdeCinza = true;
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "verdecinza";
@@ -401,6 +413,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -413,9 +426,10 @@ public class RGB {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         FramePrincipal.azulCinza = true;
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "azulcinza";
@@ -432,6 +446,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -449,8 +464,9 @@ public class RGB {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "negativo";
@@ -472,6 +488,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -546,8 +563,9 @@ public class RGB {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "expansao";
@@ -626,6 +644,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -703,8 +722,9 @@ public class RGB {
                 FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        framePrincipal.foiAplicado = true;
+        FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         elto.valor = 0;
         elto.codOp = "equalizacao";
@@ -786,6 +806,7 @@ public class RGB {
                 FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
             }
         }
+        
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
@@ -823,6 +844,7 @@ public class RGB {
             }
             System.out.println("\n");
         }
+        
         FramePrincipal.arrayOperacoesTemp.clear();
     }
         
@@ -842,7 +864,7 @@ public class RGB {
         FramePrincipal.vermelhoCinza = false;
         FramePrincipal.verdeCinza = false;
         FramePrincipal.azulCinza = false;
-        framePrincipal.foiAplicado = false;
+        FramePrincipal.foiAplicado = false;
         
         FramePrincipal.arrayOperacoesTemp.clear();
         if(FramePrincipal.arrayOperacoesTemp.isEmpty()){
