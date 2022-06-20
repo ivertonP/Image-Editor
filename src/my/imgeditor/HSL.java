@@ -154,34 +154,28 @@ public class HSL {
     public static BufferedImage SaturacaoSave(int x){        
         float sat;
         float y = x;
-        if(y == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemASerSalvaEmDisco;
-        }
-        else{
-            RGBparaHSLSave();
-            for(int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i ++){
-                for(int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth();j ++){                    
-                    //VERSÃO ORIGINAL
-                    sat = estruturaTemporariaCopiaSave[i][j].S + y/100;
-                    if(sat < 0){
-                        estruturaTemporariaSave[i][j].S = 0;
+        
+        RGBparaHSLSave();
+        for(int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i ++){
+            for(int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth();j ++){                    
+                //VERSÃO ORIGINAL
+                sat = estruturaTemporariaCopiaSave[i][j].S + y/100;
+                if(sat < 0){
+                    estruturaTemporariaSave[i][j].S = 0;
+                }
+                else{
+                    if(sat > 1){
+                        estruturaTemporariaSave[i][j].S = 1;
                     }
                     else{
-                        if(sat > 1){
-                            estruturaTemporariaSave[i][j].S = 1;
-                        }
-                        else{
-                            estruturaTemporariaSave[i][j].S = sat;
-                        }
+                        estruturaTemporariaSave[i][j].S = sat;
                     }
                 }
             }
-            HSLparaRGBSave();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            return FramePrincipal.imagemASerSalvaEmDisco;
         }
+        HSLparaRGBSave();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        return FramePrincipal.imagemASerSalvaEmDisco;
     }
     
     public static BufferedImage SaturacaoVermelho(int x){        
@@ -758,6 +752,9 @@ public class HSL {
         
         //Aramazena nos elementos de cada cor os últimos valores das cores correspondentes inseridos em FramePrincipal.arrayOperacoesTemp
         for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("sat")){
+                eltoTempSat = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
             if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("satVermelho")){
                 eltoTempSatVermelho = FramePrincipal.arrayOperacoesTemp.get(i);
             }
@@ -779,10 +776,17 @@ public class HSL {
             if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("satMagenta")){
                 eltoTempSatMagenta = FramePrincipal.arrayOperacoesTemp.get(i);
             }
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("lum")){
+                eltoTempBrilho = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("hue")){
+                eltoTempMatiz = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
         }
         
         //Remove de FramePrincipal.arrayOperacoesTemp todas as cores inseridas que não sejam iguais à última de cada cor
         for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("sat") && e.valor != eltoTempSat.valor));
             FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("satVermelho") && e.valor != eltoTempSatVermelho.valor));
             FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("satVerde") && e.valor != eltoTempSatVerde.valor));
             FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("satAzul") && e.valor != eltoTempSatAzul.valor));
@@ -790,6 +794,8 @@ public class HSL {
             FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("satAmarelo") && e.valor != eltoTempSatAmarelo.valor));
             FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("satCiano") && e.valor != eltoTempSatCiano.valor));
             FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("satMagenta") && e.valor != eltoTempSatMagenta.valor));
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("lum") && e.valor != eltoTempBrilho.valor));
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("hue") && e.valor != eltoTempMatiz.valor));
         }
         
         for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
@@ -861,6 +867,7 @@ public class HSL {
     public static EstruturaHSL[][] estruturaTemporariaSave, estruturaTemporariaCopiaSave;
     public static float[] vetor = new float[3];
     public static FramePrincipal.Operacao eltoTemp = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempSat = new FramePrincipal.Operacao();
     public static FramePrincipal.Operacao eltoTempSatVermelho = new FramePrincipal.Operacao();
     public static FramePrincipal.Operacao eltoTempSatVerde = new FramePrincipal.Operacao();
     public static FramePrincipal.Operacao eltoTempSatAzul = new FramePrincipal.Operacao();
@@ -868,6 +875,8 @@ public class HSL {
     public static FramePrincipal.Operacao eltoTempSatAmarelo = new FramePrincipal.Operacao();
     public static FramePrincipal.Operacao eltoTempSatCiano = new FramePrincipal.Operacao();
     public static FramePrincipal.Operacao eltoTempSatMagenta = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempMatiz = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempBrilho = new FramePrincipal.Operacao();
         
     public static class EstruturaHSL {
         float R, G, B, H, S, L;

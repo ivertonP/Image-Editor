@@ -626,8 +626,9 @@ public class FramePrincipal extends javax.swing.JFrame {
                             imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
                         }
                     } 
-                    aplicarOperacoes();
                     System.out.println("\n");
+                    
+                    aplicarOperacoesCopia();
                     
                     ImageIO.write(imagemASerSalvaEmDisco, "PNG", new File(caminho));
                     FramePrincipal.arrayOperacoesDefinit.clear();

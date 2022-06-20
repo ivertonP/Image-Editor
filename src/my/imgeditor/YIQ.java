@@ -130,136 +130,97 @@ public class YIQ {
         }
     }
     
-    public static BufferedImage ComponenteY(int x){        
-        if(x == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemCopia;
-        }
-        else{
-            for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
-                    estruturaTemporaria[i][j].Y =  estruturaTemporariaCopia[i][j].Y + x;
-                }
+    public static BufferedImage ComponenteY(int x){
+        for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
+                estruturaTemporaria[i][j].Y =  estruturaTemporariaCopia[i][j].Y + x;
             }
-            YIQparaRGB();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
-            elto.valor = x;
-            elto.codOp = "compy";
-            FramePrincipal.arrayOperacoesTemp.add(elto);
-            System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
-            return FramePrincipal.imagemASerExibida;
         }
+        
+        YIQparaRGB();
+        
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        FramePrincipal.foiAplicado = true;
+        FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
+        elto.valor = x;
+        elto.codOp = "compy";
+        FramePrincipal.arrayOperacoesTemp.add(elto);
+        System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
+        return FramePrincipal.imagemASerExibida;
     }
     
-    public static BufferedImage ComponenteYSave(int x){        
-        if(x == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemASerSalvaEmDisco;
-        }
-        else{
-            RGBparaYIQSave();
-            for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
-                    estruturaTemporariaSave[i][j].Y =  estruturaTemporariaCopiaSave[i][j].Y + x;
-                }
+    public static BufferedImage ComponenteYSave(int x){
+        RGBparaYIQSave();
+        for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
+                estruturaTemporariaSave[i][j].Y =  estruturaTemporariaCopiaSave[i][j].Y + x;
             }
-            YIQparaRGBSave();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
         }
+        YIQparaRGBSave();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return FramePrincipal.imagemASerSalvaEmDisco;
     }
     
-    public static BufferedImage ComponenteI(int x){        
-        if(x == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemASerExibida;
-        }
-        else{
-            for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
-                    estruturaTemporaria[i][j].I =  estruturaTemporariaCopia[i][j].I + x;
-                }
+    public static BufferedImage ComponenteI(int x){
+        for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
+                estruturaTemporaria[i][j].I =  estruturaTemporariaCopia[i][j].I + x;
             }
-            YIQparaRGB();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
-            elto.valor = x;
-            elto.codOp = "compi";
-            FramePrincipal.arrayOperacoesTemp.add(elto);
-            System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
-            return FramePrincipal.imagemASerExibida;
         }
+        
+        YIQparaRGB();
+        
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        FramePrincipal.foiAplicado = true;
+        FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
+        elto.valor = x;
+        elto.codOp = "compi";
+        FramePrincipal.arrayOperacoesTemp.add(elto);
+        System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
+        return FramePrincipal.imagemASerExibida;
     }
     
-    public static BufferedImage ComponenteISave(int x){        
-        if(x == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemASerSalvaEmDisco;
-        }
-        else{
-            RGBparaYIQSave();
-            for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
-                    estruturaTemporariaSave[i][j].I =  estruturaTemporariaCopiaSave[i][j].I + x;
-                }
+    public static BufferedImage ComponenteISave(int x){
+        RGBparaYIQSave();
+        for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
+                estruturaTemporariaSave[i][j].I =  estruturaTemporariaCopiaSave[i][j].I + x;
             }
-            YIQparaRGBSave();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemASerSalvaEmDisco;
         }
+        YIQparaRGBSave();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        return FramePrincipal.imagemASerSalvaEmDisco;
     }
     
-    public static BufferedImage ComponenteQ(int x){        
-        if(x == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemASerExibida;
-        }
-        else{
-            for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
-                    estruturaTemporaria[i][j].Q =  estruturaTemporariaCopia[i][j].Q + x;
-                }
+    public static BufferedImage ComponenteQ(int x){
+        for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
+                estruturaTemporaria[i][j].Q =  estruturaTemporariaCopia[i][j].Q + x;
             }
-            YIQparaRGB();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
-            elto.valor = x;
-            elto.codOp = "compq";
-            FramePrincipal.arrayOperacoesTemp.add(elto);
-            System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
-            return FramePrincipal.imagemASerExibida;
         }
+        
+        YIQparaRGB();
+        
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        FramePrincipal.foiAplicado = true;
+        FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
+        elto.valor = x;
+        elto.codOp = "compq";
+        FramePrincipal.arrayOperacoesTemp.add(elto);
+        System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
+        return FramePrincipal.imagemASerExibida;
     }
     
-    public static BufferedImage ComponenteQSave(int x){        
-        if(x == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemASerSalvaEmDisco;
-        }
-        else{
-            RGBparaYIQSave();
-            for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
-                    estruturaTemporariaSave[i][j].Q =  estruturaTemporariaCopiaSave[i][j].Q + x;
-                }
+    public static BufferedImage ComponenteQSave(int x){
+        RGBparaYIQSave();
+        for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
+                estruturaTemporariaSave[i][j].Q =  estruturaTemporariaCopiaSave[i][j].Q + x;
             }
-            YIQparaRGBSave();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemASerSalvaEmDisco;
         }
+        YIQparaRGBSave();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        return FramePrincipal.imagemASerSalvaEmDisco;
     }
     
     public static void setLabel(JLabel label){
@@ -313,6 +274,7 @@ public class YIQ {
             }
             System.out.println("\n");
         }
+        
         FramePrincipal.arrayOperacoesTemp.clear();
     }
         
