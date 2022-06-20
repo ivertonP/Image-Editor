@@ -34,7 +34,7 @@ public class LuzESombra {
                 for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
                     for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
                         aux[i][j] = new EstruturaYIQ();
-                        Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
+                        Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
                         int Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                         int I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
                         int Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));
@@ -123,14 +123,14 @@ public class LuzESombra {
                     }
                 }
             }
-        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-        FramePrincipal.foiAplicado = true;
-        FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
-        elto.valor = x;
-        elto.codOp = "brilho";
-        FramePrincipal.arrayOperacoesTemp.add(elto);
-        System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
-        return FramePrincipal.imagemASerExibida;
+            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+            FramePrincipal.foiAplicado = true;
+            FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
+            elto.valor = x;
+            elto.codOp = "brilho";
+            FramePrincipal.arrayOperacoesTemp.add(elto);
+            System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
+            return FramePrincipal.imagemASerExibida;
         }
     }
     
@@ -361,7 +361,7 @@ public class LuzESombra {
             for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
                 for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
                     aux[i][j] = new EstruturaYIQ();
-                    Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
+                    Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
                     int Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
                     int I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
                     int Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));

@@ -854,8 +854,11 @@ public class FramePrincipal extends javax.swing.JFrame {
             if(elto.codOp.equals("equalizacao")) {
                 imagemASerSalvaEmDisco = RGB.EqualizacaoSave();
             }
-            if(elto.codOp.equals("rotacao")) {
-                imagemASerSalvaEmDisco = Morfologicas.Rotacao90Save();
+            if(elto.codOp.equals("espelharVertical")) {
+                imagemASerSalvaEmDisco = Morfologicas.EspelharVerticalSave();
+            }
+            if(elto.codOp.equals("espelharHorizontal")) {
+                imagemASerSalvaEmDisco = Morfologicas.EspelharHorizontalSave();
             }
             if(elto.codOp.equals("satVermelho")) {
                 imagemASerSalvaEmDisco = HSL.SaturacaoVermelhoSave(elto.valor);
@@ -980,8 +983,11 @@ public class FramePrincipal extends javax.swing.JFrame {
             if(elto.codOp.equals("equalizacao")) {
                 imagemASerSalvaEmDisco = RGB.EqualizacaoSave();
             }
-            if(elto.codOp.equals("rotacao")) {
-                imagemASerSalvaEmDisco = Morfologicas.Rotacao90Save();
+            if(elto.codOp.equals("espelharVertical")) {
+                imagemASerSalvaEmDisco = Morfologicas.EspelharVerticalSave();
+            }
+            if(elto.codOp.equals("espelharHorizontal")) {
+                imagemASerSalvaEmDisco = Morfologicas.EspelharHorizontalSave();
             }
             if(elto.codOp.equals("satVermelho")) {
                 imagemASerSalvaEmDisco = HSL.SaturacaoVermelhoSave(elto.valor);

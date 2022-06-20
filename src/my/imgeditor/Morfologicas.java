@@ -79,7 +79,13 @@ public class Morfologicas {
     }
     
     public static BufferedImage Rotacao90(){
-        soma = soma + 90;
+        if(soma == 0){
+         soma = 90;   
+        }
+        else{
+            soma = soma + 90;
+        }
+        
         int centroLinha = FramePrincipal.imagemASerExibida.getHeight()/2;
         int centroColuna = FramePrincipal.imagemASerExibida.getWidth()/2;
         boolean[][] matrizMapeamentoImagemASerExibida = new boolean[FramePrincipal.imagemASerExibida.getHeight()][FramePrincipal.imagemASerExibida.getWidth()];        
@@ -137,15 +143,14 @@ public class Morfologicas {
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         FramePrincipal.foiAplicado = true;
         FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
-        elto.valor = 0;
-        elto.codOp = "rotacao";
+        elto.valor = soma;
+        elto.codOp = "rotacao90";
         FramePrincipal.arrayOperacoesTemp.add(elto);
         System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
-        return imagem;
+        return FramePrincipal.imagemASerExibida;
     }
     
-    public static BufferedImage Rotacao90Save(){
-        soma = soma + 90;
+    public static BufferedImage Rotacao90Save(int somaParam){
         int centroLinha = FramePrincipal.imagemASerSalvaEmDisco.getHeight()/2;
         int centroColuna = FramePrincipal.imagemASerSalvaEmDisco.getWidth()/2;
         boolean[][] matrizMapeamentoImagemASerExibida = new boolean[FramePrincipal.imagemASerSalvaEmDisco.getHeight()][FramePrincipal.imagemASerSalvaEmDisco.getWidth()];
@@ -161,8 +166,8 @@ public class Morfologicas {
         for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
             for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
                 Color c = new Color(FramePrincipal.imagemCarregadaDoDisco.getRGB(j, i));
-                int novaLinha = (int) Math.round(centroLinha + (i - centroLinha) * Math.cos(Math.toRadians(soma)) - (j - centroColuna) * Math.sin(Math.toRadians(soma)));
-                int novaColuna = (int) Math.round(centroColuna + (i - centroLinha) * Math.sin(Math.toRadians(soma)) + (j - centroColuna) * Math.cos(Math.toRadians(soma)));
+                int novaLinha = (int) Math.round(centroLinha + (i - centroLinha) * Math.cos(Math.toRadians(somaParam)) - (j - centroColuna) * Math.sin(Math.toRadians(somaParam)));
+                int novaColuna = (int) Math.round(centroColuna + (i - centroLinha) * Math.sin(Math.toRadians(somaParam)) + (j - centroColuna) * Math.cos(Math.toRadians(somaParam)));
                 if (novaLinha >= 0 && novaLinha < FramePrincipal.imagemASerSalvaEmDisco.getHeight() && novaColuna >= 0 && novaColuna < FramePrincipal.imagemASerSalvaEmDisco.getWidth()) {
                     FramePrincipal.imagemASerSalvaEmDisco.setRGB(novaColuna, novaLinha, c.getRGB());
                     matrizMapeamentoImagemASerExibida[novaLinha][novaColuna] = true;
@@ -221,7 +226,32 @@ public class Morfologicas {
         }
         
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         FramePrincipal.foiAplicado = true;
+        elto.valor = 0;
+        elto.codOp = "espelharVertical";
+        FramePrincipal.arrayOperacoesTemp.add(elto);
+        System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
+        return imagem;
+    }
+    
+    public static BufferedImage EspelharVerticalSave(){        
+        imagem = new BufferedImage(FramePrincipal.imagemASerSalvaEmDisco.getWidth(), FramePrincipal.imagemASerSalvaEmDisco.getHeight(), BufferedImage.TYPE_INT_RGB);
+        
+        for(int i = 0; i < imagem.getHeight(); i++){
+            for(int j = 0, larguraDaImagem = imagem.getWidth() - 1; j < imagem.getWidth(); j++, larguraDaImagem--){
+                Color c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
+                imagem.setRGB(larguraDaImagem, i,c.getRGB());
+            }
+        }        
+        for(int i = 0; i < imagem.getHeight(); i++){
+            for(int j = 0; j < imagem.getWidth(); j++){
+                Color c = new Color(imagem.getRGB(j, i));
+                FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i,c.getRGB());
+            }
+        }
+        
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return imagem;
     }
     
@@ -242,7 +272,32 @@ public class Morfologicas {
         }
         
         labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
         FramePrincipal.foiAplicado = true;
+        elto.valor = 0;
+        elto.codOp = "espelharHorizontal";
+        FramePrincipal.arrayOperacoesTemp.add(elto);
+        System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
+        return imagem;
+    }
+    
+    public static BufferedImage EspelharHorizontalSave(){        
+        imagem = new BufferedImage(FramePrincipal.imagemASerSalvaEmDisco.getWidth(), FramePrincipal.imagemASerSalvaEmDisco.getHeight(), BufferedImage.TYPE_INT_RGB);
+        
+        for(int i = 0, alturaDaImagem = imagem.getHeight()-1; i < imagem.getHeight(); i++, alturaDaImagem--){
+            for(int j = 0; j < imagem.getWidth(); j++){
+                Color c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
+                imagem.setRGB(j, alturaDaImagem,c.getRGB());
+            }
+        }        
+        for(int i = 0; i < imagem.getHeight(); i++){
+            for(int j = 0; j < imagem.getWidth(); j++){
+                Color c = new Color(imagem.getRGB(j, i));
+                FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i,c.getRGB());
+            }
+        }
+        
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
         return imagem;
     }
     
@@ -524,6 +579,16 @@ public class Morfologicas {
         soma = 0;
         
         for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
+            if(FramePrincipal.arrayOperacoesTemp.get(i).codOp.equals("rotacao90")){
+                eltoTempRotacao = FramePrincipal.arrayOperacoesTemp.get(i);
+            }
+        }
+        
+        for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
+            FramePrincipal.arrayOperacoesTemp.removeIf(e -> (e.codOp.equals("rotacao90") && e.valor != eltoTempRotacao.valor));
+        }
+        
+        for(int i = 0; i < FramePrincipal.arrayOperacoesTemp.size(); i++){
             eltoTemp = FramePrincipal.arrayOperacoesTemp.get(i);
             FramePrincipal.arrayOperacoesDefinit.add(eltoTemp);
             FramePrincipal.arrayOperacoesCopia.add(eltoTemp);
@@ -593,6 +658,7 @@ public class Morfologicas {
     public static int IdMorfologicas = 5;
     public static int soma = 0;
     public static FramePrincipal.Operacao eltoTemp = new FramePrincipal.Operacao();
+    public static FramePrincipal.Operacao eltoTempRotacao = new FramePrincipal.Operacao();
     
     static class EstruturaRGB {
         double r;
