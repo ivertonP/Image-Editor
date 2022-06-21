@@ -496,6 +496,7 @@ public class HSL {
     public static BufferedImage SaturacaoCiano(int x){        
         float sat;
         float y = x;
+        
         for(int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i ++){
             for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth();j ++){
                 if(estruturaTemporariaCopia[i][j].H >= 0.45833333 && estruturaTemporariaCopia[i][j].H <= 0.5){
@@ -558,6 +559,7 @@ public class HSL {
     public static BufferedImage SaturacaoMagenta(int x){        
         float sat;
         float y = x;
+        
         for(int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i ++){
             for(int j = 0; j < FramePrincipal.imagemASerExibida.getWidth();j ++){
                 if(estruturaTemporariaCopia[i][j].H >= 0.70833333 && estruturaTemporariaCopia[i][j].H <= 0.91666667){
@@ -619,115 +621,91 @@ public class HSL {
     
     public static BufferedImage Matiz(int x){
         float y = x;
-        if(y == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemCopia;
-        }
-        else{
-            for (int j = 0; j < FramePrincipal.imagemCopia.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemCopia.getHeight(); i++) {
-                    estruturaTemporaria[i][j].H = estruturaTemporariaCopia[i][j].H + y/360;
-                }
+        
+        for (int j = 0; j < FramePrincipal.imagemCopia.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemCopia.getHeight(); i++) {
+                estruturaTemporaria[i][j].H = estruturaTemporariaCopia[i][j].H + y/360;
             }
-            HSLparaRGB();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.foiAplicado = true;
-            FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
-            elto.valor = x;
-            elto.codOp = "hue";
-            FramePrincipal.arrayOperacoesTemp.add(elto);
-            System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
-            return FramePrincipal.imagemASerExibida;
         }
+        HSLparaRGB();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        FramePrincipal.foiAplicado = true;
+        FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
+        elto.valor = x;
+        elto.codOp = "hue";
+        FramePrincipal.arrayOperacoesTemp.add(elto);
+        System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
+        return FramePrincipal.imagemASerExibida;
     }
     
     public static BufferedImage MatizSave(int x){
         float y = x;
-        if(y == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemASerSalvaEmDisco;
-        }
-        else{
-            RGBparaHSLSave();
-            for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
-                    estruturaTemporariaSave[i][j].H = estruturaTemporariaCopiaSave[i][j].H + y/360;
-                }
+        
+        RGBparaHSLSave();
+        for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
+                estruturaTemporariaSave[i][j].H = estruturaTemporariaCopiaSave[i][j].H + y/360;
             }
-            HSLparaRGBSave();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            return FramePrincipal.imagemASerSalvaEmDisco;
         }
+        HSLparaRGBSave();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        return FramePrincipal.imagemASerSalvaEmDisco;
     }
     
     public static BufferedImage Luminancia(int x){        
         float lum;
         float y = x;
-        if(y == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemCopia;
-        }
-        else{
-            for (int j = 0; j < FramePrincipal.imagemCopia.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemCopia.getHeight(); i++) {
-                    lum = estruturaTemporariaCopia[i][j].L + y/100;
-                    if(lum < 0){
-                        estruturaTemporaria[i][j].L = 0;
+        
+        for (int j = 0; j < FramePrincipal.imagemCopia.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemCopia.getHeight(); i++) {
+                lum = estruturaTemporariaCopia[i][j].L + y/100;
+                if(lum < 0){
+                    estruturaTemporaria[i][j].L = 0;
+                }
+                else{
+                    if(lum > 1){
+                        estruturaTemporaria[i][j].L = 1;
                     }
                     else{
-                        if(lum > 1){
-                            estruturaTemporaria[i][j].L = 1;
-                        }
-                        else{
-                            estruturaTemporaria[i][j].L = lum;
-                        }
+                        estruturaTemporaria[i][j].L = lum;
                     }
                 }
             }
-            HSLparaRGB();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
-            elto.valor = x;
-            elto.codOp = "lum";
-            FramePrincipal.arrayOperacoesTemp.add(elto);
-            System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
-            return FramePrincipal.imagemASerExibida;
         }
+        HSLparaRGB();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        FramePrincipal.Operacao elto = new FramePrincipal.Operacao();
+        elto.valor = x;
+        elto.codOp = "lum";
+        FramePrincipal.arrayOperacoesTemp.add(elto);
+        System.out.println(FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).codOp + ", " + FramePrincipal.arrayOperacoesTemp.get(FramePrincipal.arrayOperacoesTemp.size()-1).valor);
+        return FramePrincipal.imagemASerExibida;
     }
     
     public static BufferedImage LuminanciaSave(int x){        
         float lum;
         float y = x;
-        if(y == 0){
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
-            FramePrincipal.foiAplicado = true;
-            return FramePrincipal.imagemCopia;
-        }
-        else{
-            RGBparaHSLSave();
-            for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-                for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
-                    lum = estruturaTemporariaCopiaSave[i][j].L + y/100;
-                    if(lum < 0){
-                        estruturaTemporariaSave[i][j].L = 0;
+        
+        RGBparaHSLSave();
+        for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
+            for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
+                lum = estruturaTemporariaCopiaSave[i][j].L + y/100;
+                if(lum < 0){
+                    estruturaTemporariaSave[i][j].L = 0;
+                }
+                else{
+                    if(lum > 1){
+                        estruturaTemporariaSave[i][j].L = 1;
                     }
                     else{
-                        if(lum > 1){
-                            estruturaTemporariaSave[i][j].L = 1;
-                        }
-                        else{
-                            estruturaTemporariaSave[i][j].L = lum;
-                        }
+                        estruturaTemporariaSave[i][j].L = lum;
                     }
                 }
             }
-            HSLparaRGBSave();
-            labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
-            return FramePrincipal.imagemASerSalvaEmDisco;
         }
+        HSLparaRGBSave();
+        labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemASerExibida));
+        return FramePrincipal.imagemASerSalvaEmDisco;
     }
     
     public static void setLabel(JLabel label){
