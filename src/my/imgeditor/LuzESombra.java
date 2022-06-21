@@ -19,7 +19,7 @@ public class LuzESombra {
     public static BufferedImage Brilho(int x){
         //O metodo Brilho() (transformada Logaritmica) exibe uma imagem de saída com uma faixa de valores de escala de cinza maior que a imagem de entrada.
         //Isto permite que a visibilidade da imagem de saida seja maior onde havia tons muitos escuros.
-        int constante = 0;
+        int constante;
         
         if(x < 0){
             EstruturaYIQ[][] aux = new EstruturaYIQ[FramePrincipal.imagemASerExibida.getHeight()][FramePrincipal.imagemASerExibida.getWidth()];
@@ -87,68 +87,9 @@ public class LuzESombra {
         }
         else{
             if(x == 0){
-                EstruturaYIQ[][] aux = new EstruturaYIQ[FramePrincipal.imagemASerExibida.getHeight()][FramePrincipal.imagemASerExibida.getWidth()];
-                double maxY = 0;
-                double minY;
-                //Neste laco For(), as componentes de cor de cada pixel são convertidas em componentes YIQ
-                //e armazenadas na estrutura auxiliar EstruturaYIQ aux[][].        
-                for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
-                    for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
-                        aux[i][j] = new EstruturaYIQ();
-                        Color c = new Color(FramePrincipal.imagemASerExibida.getRGB(j, i));
-                        int Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
-                        int I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
-                        int Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));
-                        aux[i][j].Y = Y;
-                        aux[i][j].I = I;
-                        aux[i][j].Q = Q;
-                    }
-                }        
-
-                minY = aux[0][0].Y;
-                //Este laco For() armazena o menor valor de aux[][] em minY e o maior valor de aux[][] em maxY.        
-                for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
-                    for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
-                        if (aux[i][j].Y > maxY) {
-                            maxY = aux[i][j].Y;
-                        } else {
-                            if (aux[i][j].Y <= minY) {
-                                minY = aux[i][j].Y;
-                            }
-                        }
-                    }
-                }
-                //Este For() aninhado aplica a formula da expansão apenas na componente Y dos pixels,
-                //convertendo, depois, todas as componentes YIQ de volta para seus valores originais em RGB.
-                for (int j = 0; j < FramePrincipal.imagemASerExibida.getWidth(); j++) {
-                    for (int i = 0; i < FramePrincipal.imagemASerExibida.getHeight(); i++) {
-                        Color c = new Color(FramePrincipal.imagemCopia.getRGB(j, i));
-                        aux[i][j].Y = (int) (0.2126*(c.getRed() + 1) + 0.7152*(c.getGreen() + 1) + 0.0722*(c.getBlue() + 1));
-                        int R = (int) (aux[i][j].Y + 0.9563 * aux[i][j].I + 0.6210 * aux[i][j].Q);
-                        int G = (int) (aux[i][j].Y - 0.2721 * aux[i][j].I - 0.6474 * aux[i][j].Q);
-                        int B = (int) (aux[i][j].Y - 1.1070 * aux[i][j].I + 1.7046 * aux[i][j].Q);
-                        if (R < 0) {
-                            R = 0;
-                        }
-                        if (R > 255) {
-                            R = 255;
-                        }
-                        if (G < 0) {
-                            G = 0;
-                        }
-                        if (G > 255) {
-                            G = 255;
-                        }
-                        if (B < 0) {
-                            B = 0;
-                        }
-                        if (B > 255) {
-                            B = 255;
-                        }
-                        c = new Color(R, G, B);
-                        FramePrincipal.imagemASerExibida.setRGB(j, i, c.getRGB());
-                    }
-                }
+                labelImagem.setIcon(new ImageIcon(FramePrincipal.imagemCopia));
+                FramePrincipal.foiAplicado = true;
+                return FramePrincipal.imagemASerExibida;
             }
             else{
                 constante = x + 355;
@@ -264,102 +205,36 @@ public class LuzESombra {
             }
         }
         else{
-            if(x == 0){
-                EstruturaYIQ[][] aux = new EstruturaYIQ[FramePrincipal.imagemASerSalvaEmDisco.getHeight()][FramePrincipal.imagemASerSalvaEmDisco.getWidth()];
-                double maxY = 0;
-                double minY;
-                //Neste laco For(), as componentes de cor de cada pixel são convertidas em componentes YIQ
-                //e armazenadas na estrutura auxiliar EstruturaYIQ aux[][].        
+            constante = x + 355;
+            for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
                 for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
-                    for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-                        aux[i][j] = new EstruturaYIQ();
-                        Color c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
-                        int Y = (int) (0.299 * c.getRed() + (0.587 * c.getGreen()) + (0.114 * c.getBlue()));
-                        int I = (int) (0.596 * c.getRed() - (0.274 * c.getGreen()) - (0.322 * c.getBlue()));
-                        int Q = (int) (0.211 * c.getRed() - (0.523 * c.getGreen()) + (0.312 * c.getBlue()));
-                        aux[i][j].Y = Y;
-                        aux[i][j].I = I;
-                        aux[i][j].Q = Q;
+                    Color c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
+                    double r = c.getRed()/255.0;
+                    double g = c.getGreen()/255.0;
+                    double b = c.getBlue()/255.0;
+                    int R = (int) (constante * Math.log(1 + r));
+                    int G = (int) (constante * Math.log(1 + g));
+                    int B = (int) (constante * Math.log(1 + b));
+                    if(R > 255){
+                        R = 255;
                     }
-                }        
-
-                minY = aux[0][0].Y;
-                //Este laco For() armazena o menor valor de aux[][] em minY e o maior valor de aux[][] em maxY.        
-                for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-                    for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
-                        if (aux[i][j].Y > maxY) {
-                            maxY = aux[i][j].Y;
-                        } else {
-                            if (aux[i][j].Y <= minY) {
-                                minY = aux[i][j].Y;
-                            }
-                        }
+                    if(R < 0){
+                        R = 0;
                     }
-                }
-                //Este For() aninhado aplica a formula da expansão apenas na componente Y dos pixels,
-                //convertendo, depois, todas as componentes YIQ de volta para seus valores originais em RGB.
-                for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-                    for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
-                        Color c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
-                        aux[i][j].Y = (int) (0.2126*(c.getRed() + 1) + 0.7152*(c.getGreen() + 1) + 0.0722*(c.getBlue() + 1));
-                        int R = (int) (aux[i][j].Y + 0.9563 * aux[i][j].I + 0.6210 * aux[i][j].Q);
-                        int G = (int) (aux[i][j].Y - 0.2721 * aux[i][j].I - 0.6474 * aux[i][j].Q);
-                        int B = (int) (aux[i][j].Y - 1.1070 * aux[i][j].I + 1.7046 * aux[i][j].Q);
-                        if (R < 0) {
-                            R = 0;
-                        }
-                        if (R > 255) {
-                            R = 255;
-                        }
-                        if (G < 0) {
-                            G = 0;
-                        }
-                        if (G > 255) {
-                            G = 255;
-                        }
-                        if (B < 0) {
-                            B = 0;
-                        }
-                        if (B > 255) {
-                            B = 255;
-                        }
-                        c = new Color(R, G, B);
-                        FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
+                    if(G > 255){
+                        G = 255;
                     }
-                }
-            }
-            else{
-                constante = x + 355;
-                for (int j = 0; j < FramePrincipal.imagemASerSalvaEmDisco.getWidth(); j++) {
-                    for (int i = 0; i < FramePrincipal.imagemASerSalvaEmDisco.getHeight(); i++) {
-                        Color c = new Color(FramePrincipal.imagemASerSalvaEmDisco.getRGB(j, i));
-                        double r = c.getRed()/255.0;
-                        double g = c.getGreen()/255.0;
-                        double b = c.getBlue()/255.0;
-                        int R = (int) (constante * Math.log(1 + r));
-                        int G = (int) (constante * Math.log(1 + g));
-                        int B = (int) (constante * Math.log(1 + b));
-                        if(R > 255){
-                            R = 255;
-                        }
-                        if(R < 0){
-                            R = 0;
-                        }
-                        if(G > 255){
-                            G = 255;
-                        }
-                        if(G < 0){
-                            G = 0;
-                        }
-                        if(B > 255){
-                            B = 255;
-                        }
-                        if(B < 0){
-                            B = 0;
-                        }
-                        c = new Color(R, G, B);
-                        FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
+                    if(G < 0){
+                        G = 0;
                     }
+                    if(B > 255){
+                        B = 255;
+                    }
+                    if(B < 0){
+                        B = 0;
+                    }
+                    c = new Color(R, G, B);
+                    FramePrincipal.imagemASerSalvaEmDisco.setRGB(j, i, c.getRGB());
                 }
             }
         }
